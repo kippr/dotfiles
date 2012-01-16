@@ -105,16 +105,13 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call pathogen#infect()
-syntax on
-filetype plugin indent on
 
 
 set nocompatible
 
 " treatment for RSI
 inoremap jj <ESC>
-let mapleader = ","
+let mapleader = "\\"
 nnoremap ; :
 
 " general improvements
@@ -146,7 +143,7 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
+nnoremap <esc> :noh<esc>
 nnoremap <tab> %
 vnoremap <tab> %
 
@@ -158,8 +155,21 @@ set colorcolumn=85
 
 
 " whitespace handling
+set tabstop=2
+set shiftwidth=2
+set expandtab
 set list
 set listchars=tab:▸\ ,eol:¬
+
+" word boundaries at underscores
+set iskeyword-=_
+
+" jump around using ctrl-mv keys
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 
 " stop using the cursor keys!
 nnoremap <up> <nop>
@@ -181,7 +191,9 @@ vnoremap <F1> <ESC>
 " save on switch
 au FocusLost * :wa
 
-
+" set display options
+set transparency=20
+set fullscreen
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -192,8 +204,16 @@ au FocusLost * :wa
 nnoremap <leader>w <C-w>v<C-w>l
 
 
-" jump around using ctrl-mv keys
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" Pathogen makes anything in vim/bundle work as plugin
+call pathogen#infect()
+syntax on
+filetype plugin indent on
+
+
+"NERD Tree explorer
+nmap <silent> <c-n> :NERDTreeToggle<CR>
