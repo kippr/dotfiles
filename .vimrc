@@ -201,7 +201,7 @@ set fullscreen
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Thanks to Ian Smith-Heisters
-function! RunSpec(args)
+function! RunRspec(args)
  " shame this is required but can't get rvm working otherwise
  let spec = "zsh -c '. ~/.zshrc && rspec"
  let cmd = ":! " . spec . a:args . "'"
@@ -236,10 +236,10 @@ endfunction
 nnoremap <leader>w <C-w>v<C-w>l
 
 " run one rspec example or describe block based on cursor position
-nnoremap <leader>S :call RunSpec(" % -l " . <C-r>=line('.')<CR>)<cr>
+nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 " run full rspec file
-nnoremap <leader>s :call RunSpec(" % ")<cr>
-nnoremap <leader>a :call RunSpec("")<cr>
+nnoremap <leader>s :call RunRspec(" % ")<cr>
+nnoremap <leader>a :call RunRspec("")
 
 nnoremap <leader>g :call GreenBar()
 
