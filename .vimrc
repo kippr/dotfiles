@@ -197,12 +197,51 @@ set fullscreen
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""   Run rspecs  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Thanks to Ian Smith-Heisters
+function! RunSpec(args)
+ " shame this is required but can't get rvm working otherwise
+ let spec = "zsh -c '. ~/.zshrc && rspec"
+ let cmd = ":! " . spec . a:args . "'"
+ execute cmd
+ if v:shell_error
+   call RedBar()
+ else
+   call GreenBar()
+ end
+endfunction
+
+" and this from Gary Bernhardt
+function! RedBar()
+    hi RedBar ctermfg=white ctermbg=red guibg=red
+    echohl RedBar
+    echon repeat(" ",&columns - 1)
+    echohl
+endfunction
+
+function! GreenBar()
+    hi GreenBar ctermfg=white ctermbg=green guibg=green
+    echohl GreenBar
+    echon repeat(" ",&columns - 1)
+    echohl
+endfunction
+ 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Leader defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "open up new window
 nnoremap <leader>w <C-w>v<C-w>l
 
+" run one rspec example or describe block based on cursor position
+nnoremap <leader>S :call RunSpec(" % -l " . <C-r>=line('.')<CR>)<cr>
+" run full rspec file
+nnoremap <leader>s :call RunSpec(" % ")<cr>
+nnoremap <leader>a :call RunSpec("")<cr>
+
+nnoremap <leader>g :call GreenBar()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -217,3 +256,7 @@ filetype plugin indent on
 
 "NERD Tree explorer
 nmap <silent> <c-n> :NERDTreeToggle<CR>
+
+
+
+
