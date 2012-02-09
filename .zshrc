@@ -25,7 +25,7 @@ ${smiley}  %{$reset_color%}'
 RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/bin/git-cwd-info.rb)%{$reset_color%}'
 
 # Show completion on first TAB
-setopt menucomplete
+zstyle ':completion:*' menu select=0
 
 # Load completions for Ruby, Git, etc.
 autoload compinit
