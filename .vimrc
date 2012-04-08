@@ -200,11 +200,12 @@ set fullscreen
 ""   Run rspecs  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Thanks to Ian Smith-Heisters
+
+let g:RspecBin="zsh -c '. ~/.zshrc && rspec"
 function! RunRspec(args)
  " shame this is required but can't get rvm working otherwise
  let spec = "zsh -c '. ~/.zshrc && rspec"
- let cmd = ":! " . spec . a:args . "'"
+ let cmd = ":w!\n! " . spec . a:args . "'"
  execute cmd
  if v:shell_error
    call RedBar()
