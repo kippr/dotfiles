@@ -103,7 +103,8 @@ else
   else
     hi Normal       gui=NONE guifg=Black guibg=White
   endif
-  hi Search       guibg=CadetBlue1 guifg=NONE
+  hi Search guibg=CadetBlue1 guifg=NONE gui=underline
+  "  hi Search       guibg=CadetBlue1 guifg=NONE
   hi Statement    gui=bold guifg=Maroon guibg=NONE
   hi Todo         gui=NONE guifg=DarkGreen guibg=PaleGreen1
   hi Type         gui=bold guifg=Green4 guibg=NONE

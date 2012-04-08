@@ -1,14 +1,5 @@
 
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2011 Apr 15
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
+" Based on Bram Molenaar's example, added to quite a bit since then
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -51,6 +42,7 @@ endif
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
+  colorscheme kip
   set hlsearch
 endif
 
@@ -142,7 +134,6 @@ set smartcase
 set gdefault
 set incsearch
 set showmatch
-set hlsearch
 nnoremap <esc> :noh<esc>
 nnoremap <tab> %
 vnoremap <tab> %
