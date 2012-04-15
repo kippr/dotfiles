@@ -179,12 +179,25 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" save on switch
-au FocusLost * :wa
+" save on switch window
+au FocusLost * !silent wa
+
+" save on switch buffer
+:set autowriteall
 
 " set display options
 set transparency=20
 set fullscreen
+
+
+" map ctrl-space to autocomplete - wont' work :(
+"inoremap <C-Space> <C-p>
+"inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+"\ "\<lt>C-n>" :
+"\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+"\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+"\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+"imap <C-@> <C-Space>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
