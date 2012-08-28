@@ -121,8 +121,10 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set relativenumber
-set undofile
+if version >= 703
+  set relativenumber
+  set undofile
+endif
 
 
 
@@ -142,7 +144,10 @@ vnoremap <tab> %
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+if version >= 703
+  set colorcolumn=85
+endif
+
 
 
 " whitespace handling
@@ -186,8 +191,10 @@ au FocusLost * !silent wa
 :set autowriteall
 
 " set display options
-set transparency=20
-set fullscreen
+if has('transparency')
+  set transparency=20
+  set fullscreen
+endif
 
 
 " map ctrl-space to autocomplete - wont' work :(
@@ -236,7 +243,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Leader defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+      \
 "open up new window
 nnoremap <leader>w <C-w>v<C-w>l
 
