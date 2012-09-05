@@ -136,7 +136,7 @@ set smartcase
 set gdefault
 set incsearch
 set showmatch
-nnoremap <esc> :noh<esc>
+nnoremap <cr> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
@@ -268,7 +268,6 @@ filetype plugin indent on
 
 "NERD Tree explorer
 nmap <silent> <c-n> :NERDTreeToggle<CR>
-
 
 
 
