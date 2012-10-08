@@ -101,6 +101,8 @@ endif
 
 set nocompatible
 
+set fileformats=unix,dos
+
 " treatment for RSI
 inoremap jj <ESC>
 let mapleader = "\\"
@@ -142,17 +144,17 @@ vnoremap <tab> %
 
 " long line handling
 set wrap
-set textwidth=79
+set textwidth=119
 set formatoptions=qrn1
 if version >= 703
-  set colorcolumn=85
+  set colorcolumn=122
 endif
 
 
 
 " whitespace handling
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -185,7 +187,9 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 " save on switch window
-au FocusLost * !silent wa
+if has('mac')
+  au FocusLost * !silent wa
+endif
 
 " save on switch buffer
 :set autowriteall
@@ -195,10 +199,10 @@ if has('transparency')
   set transparency=20
   set fullscreen
 endif
+set background=light
+set guifont=lucida_sans_typewriter:h9:cANSI 
 
-
-" map ctrl-space to autocomplete - wont' work :(
-"inoremap <C-Space> <C-p>
+" map ctrl-space to autocomplete - wont' work :( "inoremap <C-Space> <C-p>
 "inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
 "\ "\<lt>C-n>" :
 "\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
