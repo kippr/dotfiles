@@ -101,6 +101,8 @@ endif
 
 set nocompatible
 
+set fileformats=unix,dos
+
 " treatment for RSI
 inoremap jj <ESC>
 let mapleader = "\\"
@@ -142,17 +144,17 @@ vnoremap <tab> %
 
 " long line handling
 set wrap
-set textwidth=79
+set textwidth=129
 set formatoptions=qrn1
 if version >= 703
-  set colorcolumn=85
+  set colorcolumn=131
 endif
 
 
 
 " whitespace handling
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -165,6 +167,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+nmap <space> zz
 
 
 " stop using the cursor keys!
@@ -185,7 +189,9 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 " save on switch window
-au FocusLost * !silent wa
+if has('mac')
+  au FocusLost * !silent wa
+endif
 
 " save on switch buffer
 :set autowriteall
@@ -195,10 +201,10 @@ if has('transparency')
   set transparency=20
   set fullscreen
 endif
+set background=light
+set guifont=lucida_sans_typewriter:h9:cANSI 
 
-
-" map ctrl-space to autocomplete - wont' work :(
-"inoremap <C-Space> <C-p>
+" map ctrl-space to autocomplete - wont' work :( "inoremap <C-Space> <C-p>
 "inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
 "\ "\<lt>C-n>" :
 "\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
@@ -207,8 +213,24 @@ endif
 "imap <C-@> <C-Space>
 
 
+if has("win32") || has("win64")
+   set directory=$TMP
+else
+   set directory=/tmp
+end
+
+if has("win32") || has("win64")
+    set guioptions-=m
+    set guioptions-=T
+end
+
+map <Leader>b :MiniBufExplorer<cr>
+
+" enable Gary Bernhardt's python complexity gutter by default
+let g:complexity_always_on = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""   Run rspecs  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""   Run tests/ specs  """"""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -223,6 +245,17 @@ function! RunRspec(args)
  else
    call GreenBar()
  end
+endfunction
+
+
+function! RunPythonTest(args)
+    let cmd = ":wa!\n!nosetests -m \"((?:^\|[_.-])(:?[tT]est\|When\|should))\"" . a:args
+    execute cmd
+    if v:shell_error
+        call RedBar()
+    else
+        call GreenBar()
+    end
 endfunction
 
 " and this from Gary Bernhardt
@@ -240,12 +273,15 @@ function! GreenBar()
     echohl
 endfunction
  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Leader defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
       \
 "open up new window
-nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <leader>w :vsplit<cr><c-w>l
+nnoremap <leader>W :split<cr><c-w>j
+nnoremap <leader>x :quit<cr>
+
 
 " run one rspec example or describe block based on cursor position
 nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
@@ -254,6 +290,10 @@ nnoremap <leader>s :call RunRspec(" % ")<cr>
 nnoremap <leader>a :call RunRspec("")
 
 nnoremap <leader>g :call GreenBar()
+
+
+nnoremap <leader>t :call RunPythonTest(" % ")<cr>
+nnoremap <leader>T :call RunPythonTest("")<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""

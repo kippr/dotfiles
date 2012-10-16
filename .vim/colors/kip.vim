@@ -87,7 +87,7 @@ if &background == "dark"
   hi lCursor      guibg=LightSlateGrey guifg=bg
 else
   hi Boolean      gui=NONE guifg=Red3 guibg=NONE
-  hi Comment      gui=italic guifg=Blue2 guibg=NONE
+  hi Comment      gui=NONE guifg=Blue2 guibg=NONE
   hi Constant     gui=NONE guifg=DarkOrange guibg=NONE
   hi Cursor       guibg=fg guifg=bg
   hi CursorColumn guibg=#F1F5FA
