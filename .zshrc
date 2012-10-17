@@ -39,3 +39,6 @@ zstyle ':completion:*' menu select=0
 autoload compinit
 compinit
 
+# VI mode
+bindkey -v
+bindkey "jj" vi-cmd-mode
