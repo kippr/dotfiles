@@ -5,10 +5,11 @@
 #   Geoffrey Grosenbach http://peepcode.com
 
 
+export PATH=${PATH}:/usr/local/bin
 if [[ -d ~/bin ]] ; then export PATH=${PATH}:~/bin; fi
 
-# todo: kp: better way?
-export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/bin/:/usr/local/share/python:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/local/mysql/bin/:~/ac/bin
+# todo: kp: put symlinks in /usr/local/bin instead?
+export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/local/mysql/bin/:~/ac/bin
 
 export MYSQLDUMP=/Applications/MAMP/Library/bin/mysqldump
 export MYSQL=/Applications/MAMP/Library/bin/mysql
