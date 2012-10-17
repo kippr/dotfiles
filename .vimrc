@@ -159,9 +159,6 @@ set expandtab
 set list
 set listchars=tab:▸\ ,eol:¬
 
-" word boundaries at underscores
-set iskeyword-=_
-
 " jump around using ctrl-mv keys
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
