@@ -1,1 +1,20 @@
-/Users/kip/.gitconfig
+[user]
+	name = Kris Powell
+	email = krispowell@avocacapital.com
+[color]
+	ui = auto
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /Users/kip/.gitignore
+[color "diff"]
+	whitespace = blue reverse
+[alias]
+	co = checkout
+	ci = commit
+	br = branch
+	stat = status
+	cd = diff --color-words
+	st = status
+	l = log --oneline --decorate --graph
+	ll = log --stat
+	dc = diff --color-words --cached
