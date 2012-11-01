@@ -190,6 +190,8 @@ def complexity_name(complexity):
 
 def show_complexity():
     current_file = vim.current.buffer.name
+    if not current_file:
+        return
     try:
         scores = compute_scores_for(current_file)
     except (IndentationError, SyntaxError):

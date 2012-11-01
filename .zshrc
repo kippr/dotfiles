@@ -7,6 +7,7 @@
 
 export PATH=${PATH}:/usr/local/bin
 if [[ -d ~/bin ]] ; then export PATH=${PATH}:~/bin; fi
+if [[ -d /usr/local/share/python ]] ; then export PATH=${PATH}:/usr/local/share/python; fi
 
 # todo: kp: put symlinks in /usr/local/bin instead?
 export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/local/mysql/bin/:~/ac/bin
@@ -14,6 +15,8 @@ export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/
 export MYSQLDUMP=/Applications/MAMP/Library/bin/mysqldump
 export MYSQL=/Applications/MAMP/Library/bin/mysql
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+
+export DJANGO_SETTINGS_MODULE=crmweb.settings
 
 
 # RVM
@@ -43,3 +46,5 @@ compinit
 # VI mode
 bindkey -v
 bindkey "jj" vi-cmd-mode
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

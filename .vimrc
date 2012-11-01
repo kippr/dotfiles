@@ -41,7 +41,6 @@ endif
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
   colorscheme kip
   set hlsearch
 endif
@@ -159,6 +158,8 @@ set expandtab
 set list
 set listchars=tab:▸\ ,eol:¬
 
+syntax on
+
 " jump around using ctrl-mv keys
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -199,7 +200,10 @@ if has('transparency')
   set fullscreen
 endif
 set background=light
-set guifont=lucida_sans_typewriter:h9:cANSI 
+
+if has("win32") || has("win64")
+    set guifont=lucida_sans_typewriter:h9:cANSI
+endif
 
 " map ctrl-space to autocomplete - wont' work :( "inoremap <C-Space> <C-p>
 "inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
@@ -269,7 +273,7 @@ function! GreenBar()
     echon repeat(" ",&columns - 1)
     echohl
 endfunction
- 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Leader defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -292,6 +296,8 @@ nnoremap <leader>g :call GreenBar()
 nnoremap <leader>t :call RunPythonTest(" % ")<cr>
 nnoremap <leader>T :call RunPythonTest("")<cr>
 
+nnoremap <leader>f :set fullscreen!<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -299,7 +305,7 @@ nnoremap <leader>T :call RunPythonTest("")<cr>
 
 " Pathogen makes anything in vim/bundle work as plugin
 call pathogen#infect()
-syntax on
+
 filetype plugin indent on
 
 
