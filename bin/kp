@@ -3,7 +3,7 @@
 tag=$1
 if [ "" == "$tag" ] ; then
     for i in XXXX todo refactor style qq; do
-        count=`ack -h "#\W*kp:\W+$i"|wc -l`
+        count=`ack -h "#\W*kp:\W+$i" -a |wc -l`
         echo -e "$count\t$i"
     done
     count=`ack -h "#\W*todo:\W+kp:"|wc -l`
