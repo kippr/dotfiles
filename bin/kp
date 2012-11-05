@@ -16,8 +16,8 @@ else \
     fi
     matching_files=`git grep -E -l "$tag"`
     for file in $matching_files ; do
-        echo -e "\n$file\n------------------------------------------------"
-        git --no-pager blame -L "/$tag/,+5" --date=short -- "$file"
+        echo -e "\n$file\n---------------------------------------------------------------------------------"
+        git --no-pager blame --date=short -- "$file" | ack -A 5 "$tag"
     done
 fi
 
