@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+tag=$1
+if [ "" == "$tag" ] ; then
+    for i in XXXX todo refactor style qq; do
+        count=`ack -h "#\W*kp:\W+$i"|wc -l`
+        echo -e "$count\t$i"
+    done
+    count=`ack -h "#\W*todo:\W+kp:"|wc -l`
+    echo -e "$count\ttodo: kp (kp)"
+else \
+    if [ "$tag" == "kp" ] ; then
+        tag="todo: kp"
+    else
+        tag="kp: $tag"
+    fi
+    matching_files=`git grep -E -l "$tag"`
+    for file in $matching_files ; do
+        echo -e "\n$file\n------------------------------------------------"
+        git --no-pager blame -L "/$tag/,+5" --date=short -- "$file"
+    done
+fi
+
