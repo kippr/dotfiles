@@ -14,7 +14,7 @@ export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/
 
 export MYSQLDUMP=/Applications/MAMP/Library/bin/mysqldump
 export MYSQL=/Applications/MAMP/Library/bin/mysql
-export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+#export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 export DJANGO_SETTINGS_MODULE=crmweb.settings
 
@@ -50,3 +50,10 @@ bindkey "jj" vi-cmd-mode
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 alias ll="ls -latr"
+
+if [ -d ~/ac/.conf.d ] ; then
+    source ~/ac/.conf.d/.bashrc.common
+    source ~/ac/.conf.d/.bashrc.avoca
+fi
+
+t() { "$@" ; x=$?; terminal-notifier -message "$( echo $@ ) returned $x" -title "Command $HISTCMD Completed" -activate com.apple.Terminal >/dev/null ; return $x }
