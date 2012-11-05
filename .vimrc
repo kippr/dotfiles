@@ -14,9 +14,12 @@ set nocompatible
 set backspace=indent,eol,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+    set nobackup    " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+    set backup      " keep a backup file
+    set backupdir=$TEMP
+    set undodir=$TEMP
+    set directory=$TEMP
 endif
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
@@ -197,7 +200,7 @@ endif
 " set display options
 if has('transparency')
   set transparency=20
-  set fullscreen
+  "set fullscreen
 endif
 set background=light
 
@@ -213,12 +216,6 @@ endif
 "\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 "imap <C-@> <C-Space>
 
-
-if has("win32") || has("win64")
-   set directory=$TMP
-else
-   set directory=/tmp
-end
 
 if has("win32") || has("win64")
     set guioptions-=m
