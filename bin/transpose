@@ -1,0 +1,22 @@
+#!/usr/bin/ruby
+
+# otherwise reading blocks
+exit if STDIN.tty?
+
+pretty_print = ARGV.include? '-p'
+ARGV.shift if pretty_print
+
+delim = ARGV[0] || "\t"
+
+lines = []
+max_widths = []
+STDIN.each do |line|
+    lines << line.strip.split(delim).each{ |x| x.strip }
+    max_widths << lines.last.max_by(&:length).length if pretty_print
+end
+
+format_pieces = pretty_print ? max_widths.collect{ |width| "%-#{width}s" } : ["%s"] * lines.length
+headers = lines.shift
+columns = headers.zip(*lines)
+format_string = format_pieces.join(delim)
+columns.each{ |column| puts format_string % column }
