@@ -15,6 +15,8 @@ STDIN.each do |line|
     max_widths << lines.last.max_by(&:length).length if pretty_print
 end
 
+exit if lines.empty?
+
 format_pieces = pretty_print ? max_widths.collect{ |width| "%-#{width}s" } : ["%s"] * lines.length
 headers = lines.shift
 columns = headers.zip(*lines)
