@@ -9,12 +9,20 @@
 [color "diff"]
 	whitespace = blue reverse
 [alias]
+    aa = add --all
 	co = checkout
 	ci = commit
 	br = branch
 	stat = status
-	cd = diff --color-words
 	st = status
-	l = log --oneline --decorate --graph
-	ll = log --stat
-	dc = diff --color-words --cached
+    l = "!. ~/.githelpers && pretty_git_log --all"
+    r = "!git l -30"
+    #l = log --oneline --decorate --graph --all
+	ll = log --stat --graph --decorate --all
+	h = log --stat --decorate -1
+	di = diff
+    diw = diff --color-words
+	dc = diff --cached
+    dcw = diff --cached --color-words
+    amend = commit --amend -C HEAD
+    re = rebase -i HEAD~10
