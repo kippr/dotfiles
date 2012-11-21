@@ -1,0 +1,5 @@
+#!/bin/zsh
+cd ~/ac/CRM/crmweb
+
+nohup /Applications/MacVim.app/Contents/MacOS/Vim -g -f &
+cd -
