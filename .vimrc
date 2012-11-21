@@ -198,10 +198,6 @@ endif
 :set autowriteall
 
 " set display options
-if has('transparency')
-  set transparency=20
-  "set fullscreen
-endif
 set background=light
 
 if has("win32") || has("win64")
@@ -221,8 +217,6 @@ if has("win32") || has("win64")
     set guioptions-=m
     set guioptions-=T
 end
-
-map <Leader>b :MiniBufExplorer<cr>
 
 " enable Gary Bernhardt's python complexity gutter by default
 let g:complexity_always_on = 1
@@ -245,6 +239,10 @@ function! RunRspec(args)
  end
 endfunction
 
+function! RunDjangoTest(args)
+    let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\"" . a:args
+    execute cmd
+endfunction
 
 function! RunPythonTest(args)
     let cmd = ":wa!\n!nosetests -m \"((?:^\|[_.-])(:?[tT]est\|When\|should))\"" . a:args
@@ -290,8 +288,8 @@ nnoremap <leader>a :call RunRspec("")
 nnoremap <leader>g :call GreenBar()
 
 
-nnoremap <leader>t :call RunPythonTest(" % ")<cr>
-nnoremap <leader>T :call RunPythonTest("")<cr>
+nnoremap <leader>R :call RunDjangoTest(" % ")<cr>
+nnoremap <leader>r :call RunDjangoTest("")<cr>
 
 nnoremap <leader>f :set fullscreen!<cr>
 
