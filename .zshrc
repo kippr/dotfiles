@@ -14,10 +14,17 @@ export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/
 
 export MYSQLDUMP=/Applications/MAMP/Library/bin/mysqldump
 export MYSQL=/Applications/MAMP/Library/bin/mysql
-#export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
-export DJANGO_SETTINGS_MODULE=crmweb.settings
+# kp: rainy: without this, mysql-python can't find deps. Another way to do that?
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
+#export DJANGO_SETTINGS_MODULE=crmweb.settings
+export DJANGO_SETTINGS_MODULE=misweb.settings
+export PROJ_ROOT=~/ac
+
+export HISTSIZE=1000
+export SAVEHIST=1000
+export HISTFILE=~/.history
 
 # RVM
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
@@ -49,7 +56,10 @@ bindkey "jj" vi-cmd-mode
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-alias ll="ls -latr"
+alias ll="ls -lah"
+alias lr="ls -lahtr"
+
+alias g=/usr/bin/git
 
 if [ -d ~/ac/.conf.d ] ; then
     source ~/ac/.conf.d/.bashrc.common
