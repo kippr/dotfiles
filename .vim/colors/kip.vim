@@ -92,7 +92,7 @@ else
   hi Cursor       guibg=fg guifg=bg
   hi CursorColumn guibg=#F1F5FA
   hi CursorIM     guibg=fg guifg=bg
-  hi CursorLine   guibg=#F1F5FA
+  hi CursorLine     guifg=NONE        guibg=#F1F5FA     gui=NONE      cterm=NONE ctermfg=NONE        ctermbg=254
   hi DiffChange   guibg=DeepSkyBlue
   hi DiffDelete   gui=bold guifg=Black guibg=SlateBlue
   hi DiffText     gui=NONE guibg=Gold
