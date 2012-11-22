@@ -66,4 +66,16 @@ if [ -d ~/ac/.conf.d ] ; then
     source ~/ac/.conf.d/.bashrc.avoca
 fi
 
-t() { "$@" ; x=$?; terminal-notifier -message "$( echo $@ ) returned $x" -title "Command $HISTCMD Completed" -activate com.apple.Terminal >/dev/null ; return $x }
+function t()
+{
+    start=`date +%s`
+    "$@"
+    x=$?
+    runtime=$(( `date +%s` - $start ))
+    if [ $x -eq 0 ] 
+    then cmdemoji=😄
+    else cmdemoji=😡
+    fi
+    terminal-notifier -title "${cmdemoji} $( echo $@ )" -message "CMD#$HISTCMD took $runtime secs" -activate com.apple.Terminal >/dev/null
+    return $x
+}
