@@ -39,7 +39,7 @@ pretty_git_log() {
         # Line columns up based on } delimiter
         column -s '}' -t |
         # highlight current location
-        sed "s/* \(.*(.*HEAD.*\))/${bold}# \1${offbold}/" |
+        sed "s/\(([^)]*\)\(HEAD\)\([^)]*)\)/\1${bold}\2${offbold}\3/" |
         # Page only if we need to
         less -FXRS
 }
