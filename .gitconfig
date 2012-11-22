@@ -15,11 +15,11 @@
 	br = branch
 	stat = status
 	st = status
-    l = "!. ~/.githelpers && pretty_git_log --all"
-    r = "!git l -30"
-    #l = log --oneline --decorate --graph --all
+	s  = status
+    l  = "!. ~/.githelpers && pretty_git_log --all"
+    r  = "!git l -30"
 	ll = log --stat --graph --decorate --all
-	h = log --stat --decorate -1
+	h  = log --stat --decorate -1
 	di = diff
     diw = diff --color-words
 	dc = diff --cached

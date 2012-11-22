@@ -27,13 +27,19 @@ show_git_head() {
 }
 
 pretty_git_log() {
+    bold=`tput smso`
+    offbold=`tput rmso`
     git log --graph --pretty="tformat:${FORMAT}" $* |
         # Replace (2 years ago) with (2 years)
         sed -Ee 's/(^[^<]*) ago\)/\1)/' |
         # Replace (2 years, 5 months) with (2 years)
         sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
+        # convert two word names into abbrev - this could be nicer!
+        sed 's/<\([A-Z]\)[a-z ]*\([A-Z]\)[A-Za-z \-]*>/<\1\2>/' |
         # Line columns up based on } delimiter
         column -s '}' -t |
+        # highlight current location
+        sed "s/* \(.*(.*HEAD.*\))/${bold}# \1${offbold}/" |
         # Page only if we need to
         less -FXRS
 }
