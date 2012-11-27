@@ -45,5 +45,6 @@ pretty_git_log() {
 }
 rebase_unpushed() {
     num=$((`pretty_git_log | sed '/([^)]*origin[^)]*)/{q;}' | wc -l` - 1))
+    if [ "$num" == "0" ] ; then echo "all pushed" && exit 1 ; fi
     git rebase -i HEAD~$num
 }
