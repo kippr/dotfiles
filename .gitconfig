@@ -25,4 +25,4 @@
 	dc = diff --cached
     dcw = diff --cached --color-words
     amend = commit --amend -C HEAD
-    re = rebase -i HEAD~10
+    re = "!. ~/.githelpers && rebase_unpushed"

@@ -60,6 +60,7 @@ alias ll="ls -lah"
 alias lr="ls -lahtr"
 
 alias g=/usr/bin/git
+alias gi=/usr/bin/git
 
 if [ -d ~/ac/.conf.d ] ; then
     source ~/ac/.conf.d/.bashrc.common

@@ -43,4 +43,7 @@ pretty_git_log() {
         # Page only if we need to
         less -FXRS
 }
-
+rebase_unpushed() {
+    num=$((`pretty_git_log | sed '/([^)]*origin[^)]*)/{q;}' | wc -l` - 1))
+    git rebase -i HEAD~$num
+}
