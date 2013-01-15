@@ -26,3 +26,7 @@
     dcw = diff --cached --color-words
     amend = commit --amend -C HEAD
     re = "!. ~/.githelpers && rebase_unpushed"
+[diff "tgz"]
+	textconv = tar zvtf
+[diff "docx"]
+	textconv = dump-docx.sh
