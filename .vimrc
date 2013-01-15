@@ -9,6 +9,18 @@ endif
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
+"
+syntax enable
+
+" set display options
+" I don't know what this is about but without flipping I don't get syntax highlighting
+"set background=dark
+set background=light
+"
+"let g:solarized_termcolors=256
+colorscheme solarized
+
+set shell=bash
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -22,11 +34,12 @@ else
     set directory=$TEMP
 endif
 set history=200		" keep lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
 
 set winwidth=130
+set winheight=30
+set winminheight=8
+" no idea why I can't just set this to 999 up front :(
+set winheight=999
 set scrolloff=3
 
 
@@ -45,12 +58,8 @@ if has('mouse')
   set mouse=a
 endif
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  colorscheme kip
-  set hlsearch
-endif
+set wildignore+=*.pyc,.git,ENV
+
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -110,7 +119,8 @@ set nocompatible
 set fileformats=unix,dos
 
 " treatment for RSI
-inoremap jj <ESC>
+inoremap jj <ESC>j
+inoremap kk <ESC>k
 let mapleader = "\\"
 nnoremap ; :
 
@@ -144,7 +154,10 @@ set smartcase
 set gdefault
 set incsearch
 set showmatch
-nnoremap <cr> :noh<cr>
+set hlsearch
+"nnoremap <cr> :nohlsearch<cr>
+" remapping enter to above breaks enter on quickfix - way to avoid that?
+nmap <space> :nohlsearch<cr>zz
 nnoremap <tab> %
 vnoremap <tab> %
 
@@ -156,16 +169,17 @@ if version >= 703
   set colorcolumn=131
 endif
 
+"set statusline=%{fugitive#statusline()}
+
 
 
 " whitespace handling
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
 set list
 set listchars=tab:▸\ ,eol:¬
-
-syntax on
 
 " jump around using ctrl-mv keys
 nnoremap <C-h> <C-w>h
@@ -173,7 +187,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nmap <space> zz
+
 
 
 " stop using the cursor keys!
@@ -201,8 +215,6 @@ endif
 " save on switch buffer
 :set autowriteall
 
-" set display options
-set background=light
 
 if has("win32") || has("win64")
     set guifont=lucida_sans_typewriter:h9:cANSI
@@ -267,7 +279,7 @@ function! RedBar()
 endfunction
 
 function! GreenBar()
-    hi GreenBar ctermfg=white ctermbg=green guibg=green
+    hi GreenBar ctermfg=white ctermbg=lightgreen guibg=lightgreen
     echohl GreenBar
     echon repeat(" ",&columns - 1)
     echohl
@@ -282,6 +294,8 @@ nnoremap <leader>w :vsplit<cr><c-w>l
 nnoremap <leader>W :split<cr><c-w>j
 nnoremap <leader>x :quit<cr>
 
+nnoremap <leader>T :CommandTFlush<cr>:CommandT<cr>
+nnoremap <leader>t :CommandT<cr>
 
 " run one rspec example or describe block based on cursor position
 nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
@@ -289,13 +303,11 @@ nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 nnoremap <leader>s :call RunRspec(" % ")<cr>
 nnoremap <leader>a :call RunRspec("")
 
-nnoremap <leader>g :call GreenBar()
+nnoremap <leader>r :call RunDjangoTest(" % ")<cr>
+nnoremap <leader>R :call RunDjangoTest("")<cr>
 
-
-nnoremap <leader>R :call RunDjangoTest(" % ")<cr>
-nnoremap <leader>r :call RunDjangoTest("")<cr>
-
-nnoremap <leader>f :set fullscreen!<cr>
+"nnoremap <leader>f :set fullscreen!<cr>
+nnoremap <leader>f :FixWhitespace<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -306,10 +318,4 @@ nnoremap <leader>f :set fullscreen!<cr>
 call pathogen#infect()
 
 filetype plugin indent on
-
-
-"NERD Tree explorer
-nmap <silent> <c-n> :NERDTreeToggle<CR>
-
-
 
