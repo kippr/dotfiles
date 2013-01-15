@@ -6,7 +6,7 @@
 
 
 export PATH=${PATH}:/usr/local/bin
-if [[ -d ~/bin ]] ; then export PATH=${PATH}:~/bin; fi
+if [[ -d ~/bin ]] ; then export PATH=~/bin:${PATH}; fi
 if [[ -d /usr/local/share/python ]] ; then export PATH=${PATH}:/usr/local/share/python; fi
 
 # todo: kp: put symlinks in /usr/local/bin instead?
@@ -60,11 +60,12 @@ alias ll="ls -lah"
 alias lr="ls -lahtr"
 
 alias g=/usr/bin/git
-alias gi=/usr/bin/git
+alias gi="clear && /usr/bin/git"
 
 if [ -d ~/ac/.conf.d ] ; then
     source ~/ac/.conf.d/.bashrc.common
     source ~/ac/.conf.d/.bashrc.avoca
+    source ~/ac/.conf.d/.bashrc.mac
 fi
 
 function t()
