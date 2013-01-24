@@ -3,10 +3,10 @@
 tag=$1
 if [ "" == "$tag" ] ; then
     for i in XXXX slime todo refactor style qq; do
-        count=`ack -h "#\W*kp:\W+$i" -a |wc -l`
+        count=`ack "#\W*kp:\W+$i" -a --nogroup |grep -v '.spc' |wc -l`
         echo -e "$count\t$i"
     done
-    count=`ack -h "#\W*todo:\W+kp:"|wc -l`
+    count=`ack -h "#\W*todo:\W+kp:" | wc -l`
     echo -e "$count\ttodo: kp (kp)"
 else \
     if [ "$tag" == "kp" ] ; then
@@ -16,7 +16,7 @@ else \
     else
         tag="kp: $tag"
     fi
-    matching_files=`git grep -E -l "$tag"`
+    matching_files=`git grep -E -l "$tag" | grep -v '.spc$'`
     for file in $matching_files ; do
         echo -e "\n$file\n---------------------------------------------------------------------------------"
         git --no-pager blame --date=short -- "$file" | ack -B 2 -A 5 "$tag"
