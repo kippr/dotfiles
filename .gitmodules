@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/vim-powerline"]
 	path = .vim/bundle/vim-powerline
 	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule ".vim/bundle/vim-camelcasemotion"]
+	path = .vim/bundle/vim-camelcasemotion
+	url = https://github.com/bkad/CamelCaseMotion.git
