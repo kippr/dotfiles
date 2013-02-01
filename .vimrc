@@ -234,8 +234,11 @@ if has("win32") || has("win64")
     set guioptions-=T
 end
 
+set tags=~/.ctags-data
+"au BufWritePost *.py,*.rb silent! !nice ctags -R ~/ac/* ~/code/* &
+
 " enable Gary Bernhardt's python complexity gutter by default
-let g:complexity_always_on = 1
+"let g:complexity_always_on = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Run tests/ specs  """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -256,7 +259,9 @@ function! RunRspec(args)
 endfunction
 
 function! RunDjangoTest(args)
+    " add -s to make stdout print
     let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\"" . a:args
+    "let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\"" . a:args
     execute cmd
 endfunction
 
