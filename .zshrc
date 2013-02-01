@@ -5,9 +5,9 @@
 #   Geoffrey Grosenbach http://peepcode.com
 
 
-export PATH=${PATH}:/usr/local/bin
 if [[ -d ~/bin ]] ; then export PATH=~/bin:${PATH}; fi
 if [[ -d /usr/local/share/python ]] ; then export PATH=${PATH}:/usr/local/share/python; fi
+export PATH=/usr/local/bin:${PATH}
 
 # todo: kp: put symlinks in /usr/local/bin instead?
 export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/local/mysql/bin/:~/ac/bin
