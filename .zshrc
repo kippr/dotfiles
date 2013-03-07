@@ -68,16 +68,19 @@ if [ -d ~/ac/.conf.d ] ; then
     source ~/ac/.conf.d/.bashrc.mac
 fi
 
+export YAY=😄
+export BOO=😡
 function t()
 {
     start=`date +%s`
     "$@"
     x=$?
     runtime=$(( `date +%s` - $start ))
-    if [ $x -eq 0 ] 
-    then cmdemoji=😄
-    else cmdemoji=😡
+    if [ $x -eq 0 ]
+    then cmdemoji=$YAY
+    else cmdemoji=$BOO
     fi
     terminal-notifier -title "${cmdemoji} $( echo $@ )" -message "CMD#$HISTCMD took $runtime secs" -activate com.apple.Terminal >/dev/null
     return $x
 }
+

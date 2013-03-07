@@ -258,10 +258,23 @@ function! RunRspec(args)
  end
 endfunction
 
-function! RunDjangoTest(args)
+function! RunSingleDjangoTest()
+    echo expand("%")
+    let in_test_file = match(expand("%"), '\([Tt]est\(s\)\?.py\)$') != -1
+    echo in_test_file
+    if in_test_file
+        let t:test_file=@%
+    elseif !exists("t:test_file")
+        return
+    end
+    call RunDjangoTests(t:test_file)
+endfunction
+
+function! RunDjangoTests(args)
+
     " add -s to make stdout print
-    let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\"" . a:args
-    "let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\"" . a:args
+    let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
+    "let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling" . a:args
     execute cmd
 endfunction
 
@@ -308,8 +321,8 @@ nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 nnoremap <leader>s :call RunRspec(" % ")<cr>
 nnoremap <leader>a :call RunRspec("")
 
-nnoremap <leader>r :call RunDjangoTest(" % ")<cr>
-nnoremap <leader>R :call RunDjangoTest("")<cr>
+nnoremap <leader>r :call RunSingleDjangoTest()<cr>
+nnoremap <leader>R :call RunDjangoTests("")<cr>
 
 "nnoremap <leader>f :set fullscreen!<cr>
 nnoremap <leader>f :FixWhitespace<cr>
