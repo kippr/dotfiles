@@ -11,7 +11,7 @@
 [alias]
     aa = add --all
 	co = checkout
-	ci = commit
+	ci = commit --verbose
 	br = branch
 	stat = status
 	st = status
