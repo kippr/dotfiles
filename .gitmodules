@@ -13,3 +13,6 @@
 [submodule ".vim/bundle/vim-camelcasemotion"]
 	path = .vim/bundle/vim-camelcasemotion
 	url = https://github.com/bkad/CamelCaseMotion.git
+[submodule ".vim/bundle/vim-dispatch"]
+	path = .vim/bundle/vim-dispatch
+	url = git@github.com:kippr/vim-dispatch.git
