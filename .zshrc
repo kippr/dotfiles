@@ -43,6 +43,8 @@ ${smiley}  %{$reset_color%}'
 
 RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
 
+[ -n "$TMUX" ] && export TERM=screen-256color
+
 # Show completion on first TAB
 zstyle ':completion:*' menu select=0
 
@@ -61,6 +63,8 @@ alias lr="ls -lahtr"
 
 alias g=/usr/bin/git
 alias gi="clear && /usr/bin/git"
+alias gd="git diff"
+alias gr="git r"
 
 if [ -d ~/ac/.conf.d ] ; then
     source ~/ac/.conf.d/.bashrc.common
