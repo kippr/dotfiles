@@ -273,8 +273,8 @@ endfunction
 function! RunDjangoTests(args)
 
     " add -s to make stdout print
-    let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
-    "let cmd = ":wa! | !REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling" . a:args
+    "let cmd = ":wa! | Dispatch REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
+    let cmd = ":wa! | Dispatch REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
     execute cmd
 endfunction
 
@@ -312,6 +312,8 @@ nnoremap <leader>w :vsplit<cr><c-w>l
 nnoremap <leader>W :split<cr><c-w>j
 nnoremap <leader>x :quit<cr>
 
+nnoremap <leader>c :cclose<cr><cr>
+
 nnoremap <leader>T :CommandTFlush<cr>:CommandT<cr>
 nnoremap <leader>t :CommandT<cr>
 
@@ -321,8 +323,8 @@ nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 nnoremap <leader>s :call RunRspec(" % ")<cr>
 nnoremap <leader>a :call RunRspec("")
 
-nnoremap <leader>r :call RunSingleDjangoTest()<cr>
-nnoremap <leader>R :call RunDjangoTests("")<cr>
+nnoremap <leader>r :call RunSingleDjangoTest()<cr><cr><cr>
+nnoremap <leader>R :call RunDjangoTests("")<cr><cr><cr>
 
 "nnoremap <leader>f :set fullscreen!<cr>
 nnoremap <leader>f :FixWhitespace<cr>
