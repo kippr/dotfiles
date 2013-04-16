@@ -1,0 +1,4 @@
+*.tar.gz diff=tgz
+*.tgz diff=tgz
+*.xlsx diff=xlsx
+*.docx diff=docx

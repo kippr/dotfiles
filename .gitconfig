@@ -6,6 +6,7 @@
 [core]
 	editor = /usr/bin/vim
 	excludesfile = /Users/kip/.gitignore
+	attributesfile = /Users/kip/.gitattributes
 [color "diff"]
 	whitespace = blue reverse
 [alias]
@@ -30,3 +31,5 @@
 	textconv = tar zvtf
 [diff "docx"]
 	textconv = dump-docx.sh
+[diff "xlsx"]
+	textconv = dump-xlsx.sh
