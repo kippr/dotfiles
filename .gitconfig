@@ -33,3 +33,5 @@
 	textconv = dump-docx.sh
 [diff "xlsx"]
 	textconv = dump-xlsx.sh
+[diff]
+	tool = vimdiff
