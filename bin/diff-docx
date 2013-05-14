@@ -1,0 +1,2 @@
+#!/bin/bash
+diff <(dump-docx.sh "$1") <(dump-docx.sh "$2")
