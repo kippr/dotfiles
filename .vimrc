@@ -60,6 +60,10 @@ endif
 
 set wildignore+=*.pyc,.git,ENV
 
+function! QfMakeCopy()
+  let cmd = ":!cp " . &errorfile . " /tmp/last_build.out"
+  exec cmd
+endfunction
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -89,11 +93,15 @@ if has("autocmd")
 
   augroup END
 
+  autocmd BufNewFile,BufRead *.py compiler nose
+  autocmd QuickFixCmdPost * call QfMakeCopy()
+
 else
 
   set autoindent		" always set autoindenting on
 
 endif " has("autocmd")
+
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -274,7 +282,9 @@ function! RunDjangoTests(args)
 
     " add -s to make stdout print
     "let cmd = ":wa! | Dispatch REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
-    let cmd = ":wa! | Dispatch REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
+    "let cmd = ":wa! | Dispatch REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
+    " Switch to nose compiler file
+    let cmd = ":wa! | Make " . a:args
     execute cmd
 endfunction
 
@@ -323,8 +333,8 @@ nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 nnoremap <leader>s :call RunRspec(" % ")<cr>
 nnoremap <leader>a :call RunRspec("")
 
-nnoremap <leader>r :call RunSingleDjangoTest()<cr><cr><cr>
-nnoremap <leader>R :call RunDjangoTests("")<cr><cr><cr>
+nnoremap <leader>r :call RunSingleDjangoTest()<cr><cr>
+nnoremap <leader>R :call RunDjangoTests("")<cr><cr>
 
 "nnoremap <leader>f :set fullscreen!<cr>
 nnoremap <leader>f :FixWhitespace<cr>
