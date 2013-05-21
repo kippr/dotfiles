@@ -1,24 +1,31 @@
 #!/usr/bin/ruby
+require 'optparse'
+
+OptionParser.new do | o |
+    o.on('-p', '--pretty', 'Pretty print: align columns') { |p| $pretty_print = p }
+    o.on('-d DELIMITER', '--delimiter DELIMITER', 'Set field delimiter (default: tab)') { |d| $delim = d }
+    o.on('-t TRUNCATE', '--truncate TRUNCATE', 'Truncate strings longer than TRUNCATE characters') { |t| $truncate = t.to_i }
+    o.parse!
+end
 
 # otherwise reading blocks
 exit if STDIN.tty?
 
-pretty_print = ARGV.include? '-p'
-ARGV.shift if pretty_print
-
-delim = ARGV[0] || "\t"
+$delim = $delim || "\t"
 
 lines = []
 max_widths = []
 STDIN.each do |line|
-    lines << line.strip.split(delim).each{ |x| x.strip }
-    max_widths << lines.last.max_by(&:length).length if pretty_print
+    line = line.split($delim).collect{ |x| x.strip }
+    line = line.collect{ |x| x[0..$truncate] } if $truncate
+    lines << line
+    max_widths << lines.last.max_by(&:length).length if $pretty_print
 end
 
 exit if lines.empty?
 
-format_pieces = pretty_print ? max_widths.collect{ |width| "%-#{width}s" } : ["%s"] * lines.length
+format_pieces = $pretty_print ? max_widths.collect{ |width| "%-#{width}s" } : ["%s"] * lines.length
 headers = lines.shift
 columns = headers.zip(*lines)
-format_string = format_pieces.join(delim)
+format_string = format_pieces.join($delim)
 columns.each{ |column| puts format_string % column }
