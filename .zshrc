@@ -56,6 +56,11 @@ compinit
 bindkey -v
 bindkey "jj" vi-cmd-mode
 
+# flip into vi for editing command with v
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 alias ll="ls -lah"
