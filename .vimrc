@@ -61,7 +61,7 @@ endif
 set wildignore+=*.pyc,.git,ENV
 
 function! QfMakeCopy()
-  let cmd = ":!cp " . &errorfile . " /tmp/last_build.out"
+  let cmd = ":!~/bin/cp_build_file.sh " . &errorfile
   exec cmd
 endfunction
 
@@ -169,6 +169,12 @@ nmap <space> :nohlsearch<cr>zz
 nnoremap <tab> %
 vnoremap <tab> %
 
+inoremap <C-Space> <C-O>za
+nnoremap <C-Space> za
+onoremap <C-Space> <C-C>za
+vnoremap <C-Space> zf
+map <C-@> <C-Space>
+
 " long line handling
 set wrap
 set textwidth=129
@@ -179,7 +185,7 @@ endif
 
 "set statusline=%{fugitive#statusline()}
 
-
+set foldlevel=99
 
 " whitespace handling
 set tabstop=4
