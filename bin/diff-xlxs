@@ -1,0 +1,2 @@
+#!/bin/bash
+diff <(dump-xlsx.sh "$1") <(dump-xlsx.sh "$2")
