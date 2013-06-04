@@ -27,5 +27,5 @@ exit if lines.empty?
 format_pieces = $pretty_print ? max_widths.collect{ |width| "%-#{width}s" } : ["%s"] * lines.length
 headers = lines.shift
 columns = headers.zip(*lines)
-format_string = format_pieces.join($delim)
+format_string = format_pieces.join("\t")
 columns.each{ |column| puts format_string % column }
