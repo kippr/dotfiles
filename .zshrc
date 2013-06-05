@@ -70,6 +70,13 @@ alias g=/usr/bin/git
 alias gi="clear && /usr/bin/git"
 alias gd="git diff"
 alias gr="git r"
+alias test_results="cat /tmp/last_build.out| sed 's/\\n/
+/g' |less"
+function psgrep()
+{
+    ps -ef |grep -i $1 | grep -v $$
+}
+
 
 if [ -d ~/ac/.conf.d ] ; then
     source ~/ac/.conf.d/.bashrc.common
