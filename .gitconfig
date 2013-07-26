@@ -36,5 +36,9 @@
 	textconv = dump-xlsx.sh
 [diff]
 	tool = vimdiff
+[remote "origin"]
+	push = HEAD
+[push]
+    default = current
 [init]
 	templatedir = ~/.git_template
