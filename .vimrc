@@ -78,6 +78,10 @@ if has("autocmd")
   augroup vimrcEx
   au!
 
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
 
@@ -251,8 +255,17 @@ end
 set tags=~/.ctags-data
 "au BufWritePost *.py,*.rb silent! !nice ctags -R ~/ac/* ~/code/* &
 
+
+let g:CommandTMaxFiles=40000
+
+
 " enable Gary Bernhardt's python complexity gutter by default
 "let g:complexity_always_on = 1
+
+
+"" http://forrst.com/posts/Use_w_to_sudo_write_a_file_with_Vim-uAN
+" Sudo to write
+cmap w!! w !sudo tee % >/dev/null
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Run tests/ specs  """"""""""""""""""""""""""""""""""""""""""""""""""""
