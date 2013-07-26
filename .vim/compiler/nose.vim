@@ -15,10 +15,13 @@ let current_compiler = "nose"
 
 " Modified from pyunit, remove other lines from quickfix window
 CompilerSet efm=%-C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m,%-G%.%#
+"CompilerSet errorformat=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m
+
 
 " Set nose as default compiler
 " for :Make
 CompilerSet makeprg=REUSE_DB=1\ ~/ac/MIS/misweb/manage.py\ test\ -s\ -m'((?:^\\|[_.-])(:?[tT]est[s]?\\|When\\|should))'\ --with-fixture-bundling\ $*
+"CompilerSet makeprg=REUSE_DB=1\ ~/ac/MIS/misweb/manage.py\ test\ -s\ -m'((?:^\\|[_.-])(:?[tT]est[s]?\\|When\\|should))'\ --with-machineout\ --with-fixture-bundling\ $*
 "--debug=nose.selector&&\ read
 " for :make
 "CompilerSet makeprg=REUSE_DB=1\ ~/ac/MIS/misweb/manage.py\ test\ -s\ -m'((?:^\\\|[_.-])(:?[tT]est[s]?\\\|When\\\|should))'\
