@@ -16,3 +16,9 @@
 [submodule ".vim/bundle/vim-dispatch"]
 	path = .vim/bundle/vim-dispatch
 	url = git@github.com:kippr/vim-dispatch.git
+[submodule ".vim/bundle/vim-AnsiEsc"]
+	path = .vim/bundle/vim-AnsiEsc
+	url = git://github.com/vim-scripts/AnsiEsc.vim.git
+[submodule ".vim/bundle/snipmate"]
+	path = .vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
