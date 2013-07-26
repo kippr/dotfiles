@@ -16,7 +16,7 @@ export MYSQLDUMP=/Applications/MAMP/Library/bin/mysqldump
 export MYSQL=/Applications/MAMP/Library/bin/mysql
 
 # kp: rainy: without this, mysql-python can't find deps. Another way to do that?
-export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+#export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 #export DJANGO_SETTINGS_MODULE=crmweb.settings
 export DJANGO_SETTINGS_MODULE=misweb.settings
@@ -26,6 +26,8 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 export HISTFILE=~/.history
 
+export KNIFE_USER=kippr
+
 # RVM
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
@@ -33,6 +35,11 @@ if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 autoload -U colors
 colors
 setopt prompt_subst
+#setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+#setopt HIST_FIND_NO_DUPS
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 
 # Prompt
 local smiley="%(?,%{$fg[green]%}☺%{$reset_color%},%{$fg[red]%}☹%{$reset_color%})"
@@ -72,6 +79,7 @@ alias gd="git diff"
 alias gr="git r"
 alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 /g' |less"
+alias be="bundle exec"
 function psgrep()
 {
     ps -ef |grep -i $1 | grep -v $$
