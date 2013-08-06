@@ -1,0 +1,3 @@
+# Autoreload will pick up changes in imported things and reload them as needed
+%load_ext autoreload
+%autoreload 2
