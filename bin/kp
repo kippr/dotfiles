@@ -3,14 +3,14 @@
 tag=$1
 if [ "" == "$tag" ] ; then
     for i in XXXX slime todo refactor style qq; do
-        count=`ack "#\W*kp:\W+$i" -a --nogroup |grep -v '.spc' |wc -l`
+        count=`ack "#\W*kp:\W*$i" --nogroup |grep -v '.spc' |wc -l`
         echo -e "$count\t$i"
     done
-    count=`ack -h "#\W*todo:\W+kp:" | wc -l`
-    echo -e "$count\ttodo: kp (kp)"
+    count=`ack -h "raise\W+.*SkipTest" | wc -l`
+    echo -e "$count\tSkipped tests"
 else \
-    if [ "$tag" == "kp" ] ; then
-        tag="todo: kp"
+    if [ "$tag" == "skip" ] ; then
+        tag="SkipTest"
     elif [ "$tag" == "-" ] ; then
         tag="kp: "
     else
