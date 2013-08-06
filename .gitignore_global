@@ -3,3 +3,4 @@
 *.swo
 .vim/.netrwhist
 history.sqlite
+afiedt.buf

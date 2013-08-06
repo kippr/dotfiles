@@ -77,6 +77,7 @@ alias g=/usr/bin/git
 alias gi="clear && /usr/bin/git"
 alias gd="git diff"
 alias gr="git r"
+alias gaa="git aa"
 alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 /g' |less"
 alias be="bundle exec"
