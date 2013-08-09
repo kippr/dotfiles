@@ -1,0 +1,16 @@
+#!/bin/bash
+env python ~/ac/pwm/bin/pwm.py -r $* | while read line; do
+    echo $line | cut -d '|' -f 1
+    pwm_user=`echo $line | cut -d '|' -f 2`
+    pwm_pwd=`echo $line | cut -d '|' -f 3`
+    pwm_url=`echo $line | cut -d '|' -f 4`
+    if [ "$pwm_url" != "" ] ; then
+        echo "Opening $pwm_url"
+        open $pwm_url
+    fi
+    echo "$pwm_user" | pbcopy
+    read -p "User $pwm_user copied to clipboard, hit key to continue" < /dev/tty
+    echo "$pwm_pwd" | pbcopy
+    read -p "Password copied to clipboard, hit key to continue" < /dev/tty
+    echo "" | pbcopy
+done
