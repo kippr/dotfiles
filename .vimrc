@@ -58,7 +58,7 @@ if has('mouse')
   set mouse=a
 endif
 
-set wildignore+=*.pyc,.git,ENV
+set wildignore+=*.pyc,.git,misweb_env
 
 function! QfMakeCopy()
   let cmd = ":!~/bin/cp_build_file.sh " . &errorfile
@@ -285,25 +285,26 @@ function! RunRspec(args)
  end
 endfunction
 
-function! RunSingleDjangoTest()
-    echo expand("%")
+function! RunSingleDjangoTest(use_make)
     let in_test_file = match(expand("%"), '\([Tt]est\(s\)\?.py\)$') != -1
-    echo in_test_file
     if in_test_file
         let t:test_file=@%
     elseif !exists("t:test_file")
         return
     end
-    call RunDjangoTests(t:test_file)
+    call RunDjangoTests(t:test_file, a:use_make)
 endfunction
 
-function! RunDjangoTests(args)
-
+function! RunDjangoTests(test_file, use_make)
     " add -s to make stdout print
-    "let cmd = ":wa! | Dispatch REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
-    "let cmd = ":wa! | Dispatch REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:args
     " Switch to nose compiler file
-    let cmd = ":wa! | Make " . a:args
+    if (match(a:test_file, 'misweb') == -1 || a:use_make == 0)
+        echo "Using Dispatch"
+        let cmd = ":wa! | Dispatch . ~/ac/MIS/misweb_env/bin/activate && REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:test_file
+    else
+        echo "Using Make"
+        let cmd = ":wa! | Make " . a:test_file
+    end
     execute cmd
 endfunction
 
@@ -352,8 +353,9 @@ nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 nnoremap <leader>s :call RunRspec(" % ")<cr>
 nnoremap <leader>a :call RunRspec("")
 
-nnoremap <leader>r :call RunSingleDjangoTest()<cr><cr>
-nnoremap <leader>R :call RunDjangoTests("")<cr><cr>
+nnoremap <leader>r :call RunSingleDjangoTest(1)<cr><cr>
+nnoremap <leader><c-r> :call RunSingleDjangoTest(0)<cr><cr>
+nnoremap <leader>R :call RunDjangoTests("", 1)<cr><cr>
 
 "nnoremap <leader>f :set fullscreen!<cr>
 nnoremap <leader>f :FixWhitespace<cr>
