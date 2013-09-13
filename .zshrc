@@ -95,6 +95,11 @@ fi
 
 export YAY=😄
 export BOO=😡
+function tg()
+{
+    t git $@
+}
+
 function t()
 {
     start=`date +%s`
