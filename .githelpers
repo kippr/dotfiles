@@ -48,3 +48,7 @@ rebase_unpushed() {
     if [ "$num" == "0" ] ; then echo "all pushed" && exit 1 ; fi
     git rebase -i HEAD~$num
 }
+
+checkout_selected_branch() {
+    git branch --all --list | sed 's/^[ ]*remotes\///'|selecta|xargs git checkout
+}

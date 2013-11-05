@@ -28,6 +28,8 @@
     amend = commit --amend -C HEAD
     re = "!. ~/.githelpers && rebase_unpushed"
 	ctags = !.git/hooks/ctags
+    save = !sh -c 'export PREV=$(git symbolic-ref HEAD|cut -d/ -f3-) && git checkout -b "$1" && git commit -anm\"Stashed: $1\" && git checkout "$PREV"' -
+    cob  = "!. ~/.githelpers && checkout_selected_branch"
 [diff "tgz"]
 	textconv = tar zvtf
 [diff "docx"]
