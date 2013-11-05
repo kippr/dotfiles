@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+# Global virtualenvwrapper postactivate, lives in $WORKON_HOME/postdeactivate
+
+if [ $PRE_VENV_ACTIVATE_DIR ]; then
+    cd $PRE_VENV_ACTIVATE_DIR
+    unset PRE_VENV_ACTIVATE_DIR
+fi

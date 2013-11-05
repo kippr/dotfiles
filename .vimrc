@@ -58,7 +58,7 @@ if has('mouse')
   set mouse=a
 endif
 
-set wildignore+=*.pyc,.git,misweb_env
+set wildignore+=*.pyc,.git,dojo-1.8.1
 
 function! QfMakeCopy()
   let cmd = ":!~/bin/cp_build_file.sh " . &errorfile
@@ -299,12 +299,13 @@ function! RunDjangoTests(test_file, use_make)
     " add -s to make stdout print
     " Switch to nose compiler file
     if (match(a:test_file, 'misweb') == -1 || a:use_make == 0)
-        echo "Using Dispatch"
+        echo "Using Dispatch, value of make: " . a:use_make . ", value of test_file: " . a:test_file
         let cmd = ":wa! | Dispatch . ~/ac/MIS/misweb_env/bin/activate && REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:test_file
     else
         echo "Using Make"
         let cmd = ":wa! | Make " . a:test_file
     end
+    "sleep 3
     execute cmd
 endfunction
 

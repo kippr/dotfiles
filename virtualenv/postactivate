@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+# Global virtualenvwrapper postactivate, lives in $WORKON_HOME/postactivate
+
+# Remove virtual env from start of PS1 as it's in RPROMPT instead
+PS1="$_OLD_VIRTUAL_PS1"
+
+PROJECT_DIR="${PROJ_ROOT}/$(basename $VIRTUAL_ENV)"
+if [ -d $PROJECT_DIR ]; then
+    # If we aren't already within the project dir, cd into it
+    if [[ ! `pwd` == "$PROJECT_DIR*" ]]; then
+        export PRE_VENV_ACTIVATE_DIR=`pwd`
+        cd "$PROJECT_DIR"
+    fi
+fi
+unset PROJECT_DIR

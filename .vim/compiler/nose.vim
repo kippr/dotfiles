@@ -20,7 +20,7 @@ CompilerSet efm=%-C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m,%
 
 " Set nose as default compiler
 " for :Make
-CompilerSet makeprg=source\ ~/ac/MIS/.ENV/bin/activate;REUSE_DB=1\ ~/ac/MIS/misweb/manage.py\ test\ -s\ -m'((?:^\\|[_.-])(:?[tT]est[s]?\\|When\\|should))'\ --with-fixture-bundling\ $*
+CompilerSet makeprg=source\ ~/ac/Environments/MIS/bin/activate;REUSE_DB=1\ ~/ac/MIS/misweb/manage.py\ test\ -s\ -m'((?:^\\|[_.-])(:?[tT]est[s]?\\|When\\|should))'\ --with-fixture-bundling\ $*
 "CompilerSet makeprg=REUSE_DB=1\ ~/ac/MIS/misweb/manage.py\ test\ -s\ -m'((?:^\\|[_.-])(:?[tT]est[s]?\\|When\\|should))'\ --with-machineout\ --with-fixture-bundling\ $*
 "--debug=nose.selector&&\ read
 " for :make

@@ -22,6 +22,14 @@ export MYSQL=/Applications/MAMP/Library/bin/mysql
 export DJANGO_SETTINGS_MODULE=misweb.settings
 export PROJ_ROOT=~/ac
 
+# virtualenv
+export WORKON_HOME=~/ac/Environments
+source /usr/local/bin/virtualenvwrapper.sh
+function venv-prompt() {
+    echo $(basename ${VIRTUAL_ENV:-''})
+}
+
+
 export HISTSIZE=1000
 export SAVEHIST=1000
 export HISTFILE=~/.history
@@ -48,7 +56,7 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='%{$fg[white]%} $(venv-prompt) $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
 
 [ -n "$TMUX" ] && export TERM=screen-256color
 
