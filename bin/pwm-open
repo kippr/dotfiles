@@ -1,5 +1,5 @@
 #!/bin/bash
-env python ~/ac/pwm/bin/pwm.py -r $* | while read line; do
+env python ~/ac/pwm/bin/pwm.py -r "$*" | while read line; do
     echo $line | cut -d '|' -f 1
     pwm_user=`echo $line | cut -d '|' -f 2`
     pwm_pwd=`echo $line | cut -d '|' -f 3`
