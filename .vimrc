@@ -259,6 +259,7 @@ set tags=~/.ctags-data
 let g:CommandTMaxFiles=40000
 
 
+
 " enable Gary Bernhardt's python complexity gutter by default
 "let g:complexity_always_on = 1
 
