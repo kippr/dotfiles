@@ -301,7 +301,7 @@ function! RunDjangoTests(test_file, use_make)
     " Switch to nose compiler file
     if (match(a:test_file, 'misweb') == -1 || a:use_make == 0)
         echo "Using Dispatch, value of make: " . a:use_make . ", value of test_file: " . a:test_file
-        let cmd = ":wa! | Dispatch . ~/ac/MIS/misweb_env/bin/activate && REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:test_file
+        let cmd = ":wa! | Dispatch . ~/ac/Environments/MIS/bin/activate && REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:test_file
     else
         echo "Using Make"
         let cmd = ":wa! | Make " . a:test_file
