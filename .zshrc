@@ -127,7 +127,7 @@ function t()
     then cmdemoji=$YAY
     else cmdemoji=$BOO
     fi
-    terminal-notifier -title "${cmdemoji} $( echo $@ )" -message "CMD#$HISTCMD took $runtime secs" -activate com.apple.Terminal >/dev/null
+    terminal-notifier -title "${cmdemoji} $( echo $@ )" -message "CMD#$HISTCMD took $runtime secs" -activate com.apple.Terminal -sender com.apple.Terminal >/dev/null
     return $x
 }
 
