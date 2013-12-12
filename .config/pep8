@@ -1,0 +1,6 @@
+[pep8]
+#ignore = E226,E302,E41
+ignore = E126,E127,E711,E712
+# E126,E127 want single indent on continuatons, but I don't, I want 2 so its easy to distinguish from indented block
+# E711, E712  use blah is True/None not blah == True, but does not fail expect(False) is True
+max-line-length = 130
