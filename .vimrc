@@ -237,6 +237,10 @@ endif
 if has("win32") || has("win64")
     set guifont=lucida_sans_typewriter:h9:cANSI
 endif
+"
+" using Source Code Pro
+set anti enc=utf-8
+set guifont=Source\ Code\ Pro\ 11
 
 " map ctrl-space to autocomplete - wont' work :( "inoremap <C-Space> <C-p>
 "inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
@@ -361,6 +365,8 @@ nnoremap <leader>R :call RunDjangoTests("", 1)<cr><cr>
 
 "nnoremap <leader>f :set fullscreen!<cr>
 nnoremap <leader>f :FixWhitespace<cr>
+nnoremap <leader>c :w<cr>:SyntasticCheck<cr>
+nnoremap <leader>C :SyntasticReset<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -372,3 +378,5 @@ call pathogen#infect()
 
 filetype plugin indent on
 
+let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_python_checkers = ['python', 'pep8', 'pylint']
