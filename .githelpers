@@ -52,3 +52,8 @@ rebase_unpushed() {
 checkout_selected_branch() {
     git branch --all --list | sed 's/^[ ]*remotes\///'|selecta|xargs git checkout
 }
+
+show_selected_revision() {
+    #git log --all --pretty="tformat:%h}(%ar)}%d %s" | column -s '}' -t | selecta | cut -d ' ' -f 1 | xargs git show
+    git log --all --pretty="tformat:%h}(%ar)}%d %s" |  selecta | cut -d ' ' -f 1 | xargs git show
+}
