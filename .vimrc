@@ -35,7 +35,7 @@ else
 endif
 set history=200		" keep lines of command line history
 
-set winwidth=130
+set winwidth=134
 set winheight=30
 set winminheight=8
 " no idea why I can't just set this to 999 up front :(
@@ -152,6 +152,7 @@ set ruler
 set backspace=indent,eol,start
 set laststatus=2
 if version >= 703
+  set numberwidth=3
   set relativenumber
   set undofile
 endif
