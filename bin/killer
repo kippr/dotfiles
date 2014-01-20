@@ -1,0 +1,32 @@
+function really_kill()
+{
+    read pid
+    if [ "$pid" == "" ]; then
+        exit 1
+    fi
+    # non-zero: can't kill it or it doesn't exist?
+    echo "Asking $pid to die, nicely"
+    if ! kill $pid ; then
+        exit 2
+    fi
+    # zero return, hasn't died
+    sleep 0.1
+    if kill $pid > /dev/null &2>1 ; then
+        echo "Trying nicely AGAIN"
+        if kill $pid > /dev/null 2>&1 ; then
+            sleep 1
+            if kill $pid > /dev/null 2>&1 ; then
+                echo "Die already!"
+                kill -9 $pid
+                sleep 0.1
+                if kill $pid > /dev/null 2>&1 ; then
+                    echo "I'm a failure"
+                    exit 1
+                fi
+            fi
+        fi
+    fi
+
+}
+
+ps -e -o "pid ppid pcpu user command"|selecta|cut -c1-6|really_kill
