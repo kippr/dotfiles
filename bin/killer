@@ -29,4 +29,4 @@ function really_kill()
 
 }
 
-ps -e -o "pid ppid pcpu user command"|selecta|cut -c1-6|really_kill
+ps -e -r -o "pid ppid pcpu user command"|selecta|cut -c1-6|really_kill
