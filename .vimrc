@@ -131,8 +131,8 @@ set nocompatible
 set fileformats=unix,dos
 
 " treatment for RSI
-inoremap jj <ESC>j
-inoremap kk <ESC>k
+"inoremap jj <ESC>j
+"inoremap kk <ESC>k
 let mapleader = "\\"
 nnoremap ; :
 
