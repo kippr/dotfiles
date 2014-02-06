@@ -29,13 +29,20 @@ def category filename
     [filetype(filename), fileclass(filename)]
 end
 
-categorized = numstats.group_by{ |name,*| category(name) }.sort
+by_type = Hash[numstats.group_by{ |name,* | filetype name }.collect{ |k,v| [k, v.inject(0){|sum, data| sum + data[1]}]}]
+all = by_type.values.inject(&:+)
+categorized = numstats.group_by{ |name,*| category name }.sort
 
+puts "Type       /   Class            Net     +     -    Churn   %/Type   %/Total"
 categorized.each do |type_and_class,data|
     filetype, fileclass = type_and_class
     totals = data.inject([0,0,0]) do |totals,filedata|
         totals.zip(filedata[1..-1]).collect{|a,b| a + b}
     end
     net, added, removed = totals
-    puts "%-10s /   %-13s - %4i %4i+ %4i-  %5.0f%% net/add" % [filetype, fileclass, net, added, removed, net/added * 100]
+    churn  = 100 - (net/added * 100)
+    percent_of_type = net / by_type[filetype] * 100
+    percent_of_all = net / all * 100
+    puts "%-10s /   %-13s   %4i  %4i  %4i   %5.0f%%  %6.0f%%   %6.0f%%" % \
+            [filetype, fileclass, net, added, removed, churn, percent_of_type, percent_of_all]
 end
