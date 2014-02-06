@@ -10,7 +10,9 @@ numstats = numstats.collect do |added, deleted, name|
 end
 
 def filetype filename
-    filetype = filename.match(/\.([^\.]*)$/)[1]
+    return '-' unless filename
+    match = filename.match(/\S\.([^\.]*)$/)
+    filetype = match ? match[1] : '-'
     {'py' => 'Python', 'rb' => 'Ruby'}.fetch(filetype, filetype)
 end
 
@@ -33,7 +35,7 @@ by_type = Hash[numstats.group_by{ |name,* | filetype name }.collect{ |k,v| [k, v
 all = by_type.values.inject(&:+)
 categorized = numstats.group_by{ |name,*| category name }.sort
 
-puts "Type       /   Class            Net     +     -    Churn   %/Type   %/Total"
+puts "Type            /   Class                 Net        +        -    Churn   %/Type   %/Total"
 categorized.each do |type_and_class,data|
     filetype, fileclass = type_and_class
     totals = data.inject([0,0,0]) do |totals,filedata|
@@ -43,6 +45,6 @@ categorized.each do |type_and_class,data|
     churn  = 100 - (net/added * 100)
     percent_of_type = net / by_type[filetype] * 100
     percent_of_all = net / all * 100
-    puts "%-10s /   %-13s   %4i  %4i  %4i   %5.0f%%  %6.0f%%   %6.0f%%" % \
+    puts "%-15s /   %-15s   %7i  %7i  %7i   %5.0f%%  %6.0f%%   %6.0f%%" % \
             [filetype, fileclass, net, added, removed, churn, percent_of_type, percent_of_all]
 end
