@@ -1,18 +1,12 @@
 #!/usr/bin/env ruby
 # Pipe the results of a git (show/log) --numstat into this to see summary of changes
 
-class Array
-    def sum
-        inject{|x,y| x + y}
-    end
-end
-
 NUMSTAT_RE = /^(\d+)\s+(\d+)\s+(\S+)$/
 
 numstats = ARGF.each_line.collect{|l| l.match(NUMSTAT_RE)}.compact.collect(&:captures)
 
 numstats = numstats.collect do |added, deleted, name|
-    [name, added.to_i - deleted.to_i, added.to_i, deleted.to_i]
+    [name, added.to_f - deleted.to_f, added.to_f, deleted.to_f]
 end
 
 def filetype filename
@@ -40,7 +34,8 @@ categorized = numstats.group_by{ |name,*| category(name) }.sort
 categorized.each do |type_and_class,data|
     filetype, fileclass = type_and_class
     totals = data.inject([0,0,0]) do |totals,filedata|
-        totals.zip(filedata[1..-1]).collect(&:sum)
+        totals.zip(filedata[1..-1]).collect{|a,b| a + b}
     end
-    puts "#{totals[0]}\t+#{totals[1]}\t-#{totals[2]}\t#{filetype} / #{fileclass}"
+    net, added, removed = totals
+    puts "%-10s /   %-13s - %4i %4i+ %4i-  %5.0f%% net/add" % [filetype, fileclass, net, added, removed, net/added * 100]
 end
