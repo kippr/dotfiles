@@ -1,17 +1,13 @@
 #!/usr/bin/env ruby
 # Pipe the results of a git (show/log) --numstat into this to see summary of changes
 
-NUMSTAT_RE = /^(\d+)\s+(\d+)\s+(\S+)$/
-
-numstats = ARGF.each_line.collect{|l| l.match(NUMSTAT_RE)}.compact.collect(&:captures)
-
-numstats = numstats.collect do |added, deleted, name|
-    [name, added.to_f - deleted.to_f, added.to_f, deleted.to_f]
+def categorize filename
+    [filetype(filename), fileclass(filename)]
 end
 
 def filetype filename
     return '-' unless filename
-    match = filename.match(/\S\.([^\.]*)$/)
+    match = filename.match(/\S\.([^\.\/]+)$/)
     filetype = match ? match[1] : '-'
     {'py' => 'Python', 'rb' => 'Ruby'}.fetch(filetype, filetype)
 end
@@ -27,24 +23,36 @@ def fileclass filename
     end
 end
 
-def category filename
-    [filetype(filename), fileclass(filename)]
+NUMSTAT_RE = /^(\d+)\s+(\d+)\s+(\S+)$/
+
+# ARGF is a create ruby convenience that gives you a file-like object from either stdin or the file[s] you pass as arguments
+numstats = ARGF.each_line.collect{|line| line.match(NUMSTAT_RE)}.compact.collect(&:captures)  # compact removes nil items, e.g. lines that don't match; collect invokes 'captures' on each item
+
+numstats = numstats.collect do |added, deleted, filename|  # these are the regex captures
+    [filename, added.to_f - deleted.to_f, added.to_f, deleted.to_f] # re-order, add net and turn strings into floats
 end
 
-by_type = Hash[numstats.group_by{ |name,* | filetype name }.collect{ |k,v| [k, v.inject(0){|sum, data| sum + data[1]}]}]
-all = by_type.values.inject(&:+)
-categorized = numstats.group_by{ |name,*| category name }.sort
+
+grouped_by_type = numstats.group_by{ |filename,* | filetype(filename) }
+total_net_by_type = grouped_by_type.collect{ |filename,v| [filename, v.inject(0){|sum, data| sum + data[1]}]}  # inject sums up all the net values (position 1) per group
+total_net_by_type = Hash[total_net_by_type]  # turns array of [filename,[data]], [filename, .. back into a Hash keyed of filename
+overall_net = total_net_by_type.values.inject(&:+)  # sum up the nets for each type
+
+
+categorized = numstats.group_by{ |filename, *| categorize(filename) }.sort  # * is 'splat' operator, captures all the rest of the [filename, net, added, removed] array
 
 puts "Type            /   Class                 Net        +        -    Churn   %/Type   %/Total"
-categorized.each do |type_and_class,data|
-    filetype, fileclass = type_and_class
-    totals = data.inject([0,0,0]) do |totals,filedata|
-        totals.zip(filedata[1..-1]).collect{|a,b| a + b}
+categorized.each do |categories, data|
+    filetype, fileclass = categories
+    # this bit is just ugly... takes all the [filename, net, added, removed] arrays and summarizes it down to total net, added, removed
+    totals = data.inject([0,0,0]) do |totals, filedata|
+        totals.zip(filedata[1..-1]).collect{|a,b| a + b} # filedata: lose first filename element, zip [0,0,0] with actual values, sum them up
     end
-    net, added, removed = totals
+    net, added, removed = totals # unpack the summed up components
+    # derive the various metrics and print them out
     churn  = 100 - (net/added * 100)
-    percent_of_type = net / by_type[filetype] * 100
-    percent_of_all = net / all * 100
+    percent_of_type = net / total_net_by_type[filetype] * 100
+    percent_of_total = net / overall_net * 100
     puts "%-15s /   %-15s   %7i  %7i  %7i   %5.0f%%  %6.0f%%   %6.0f%%" % \
-            [filetype, fileclass, net, added, removed, churn, percent_of_type, percent_of_all]
+            [filetype, fileclass, net, added, removed, churn, percent_of_type, percent_of_total]
 end
