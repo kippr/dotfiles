@@ -13,7 +13,7 @@ def filetype filename
 end
 
 def fileclass filename
-    case filename
+    prefix = case filename
     when /test(s)?\./
         'Tests'
     when /spec(_helper)?\.rb$/
@@ -21,6 +21,7 @@ def fileclass filename
     else
         'Production'
     end
+    return prefix + ' / ' + filename
 end
 
 NUMSTAT_RE = /^(\d+)\s+(\d+)\s+(\S+)$/
@@ -41,18 +42,18 @@ overall_net = total_net_by_type.values.inject(&:+)  # sum up the nets for each t
 
 categorized = numstats.group_by{ |filename, *| categorize(filename) }.sort  # * is 'splat' operator, captures all the rest of the [filename, net, added, removed] array
 
-puts "Type            /   Class                 Net        +        -    Churn   %/Type   %/Total"
+puts "Type            /   Class                                                                        Net        +        -    Commits Churn   %/Type   %/Total"
 categorized.each do |categories, data|
     filetype, fileclass = categories
     # this bit is just ugly... takes all the [filename, net, added, removed] arrays and summarizes it down to total net, added, removed
-    totals = data.inject([0,0,0]) do |totals, filedata|
-        totals.zip(filedata[1..-1]).collect{|a,b| a + b} # filedata: lose first filename element, zip [0,0,0] with actual values, sum them up
+    totals = data.inject([0,0,0,0]) do |totals, filedata|
+        totals.zip(filedata[1..-1] + [1]).collect{|a,b| a + b} # filedata: lose first filename element, zip [0,0,0] with actual values, sum them up
     end
-    net, added, removed = totals # unpack the summed up components
+    net, added, removed, commits = totals # unpack the summed up components
     # derive the various metrics and print them out
     churn  = 100 - (net/added * 100)
     percent_of_type = net / total_net_by_type[filetype] * 100
     percent_of_total = net / overall_net * 100
-    puts "%-15s /   %-15s   %7i  %7i  %7i   %5.0f%%  %6.0f%%   %6.0f%%" % \
-            [filetype, fileclass, net, added, removed, churn, percent_of_type, percent_of_total]
+    puts "%-15s /   %-70s   %7i  %7i  %7i  %7i  %5.0f%%  %6.0f%%   %6.0f%%" % \
+            [filetype, fileclass, net, added, removed, commits, churn, percent_of_type, percent_of_total]
 end

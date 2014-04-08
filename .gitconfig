@@ -32,6 +32,7 @@
     cob  = "!. ~/.githelpers && checkout_selected_branch"
     shows  = "!. ~/.githelpers && show_selected_revision"
     files = diff-tree --no-commit-id --name-only -r
+    down = pull --rebase
 [diff "tgz"]
 	textconv = tar zvtf
 [diff "docx"]

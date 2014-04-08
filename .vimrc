@@ -369,6 +369,12 @@ nnoremap <leader>f :FixWhitespace<cr>
 nnoremap <leader>c :w<cr>:SyntasticCheck<cr>
 nnoremap <leader>C :SyntasticReset<cr>
 
+
+" quickfix nav
+nnoremap <leader>n :cn<cr>
+nnoremap <leader>p :cp<cr>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -380,4 +386,4 @@ call pathogen#infect()
 filetype plugin indent on
 
 let g:syntastic_mode_map = { 'mode': 'passive' }
-let g:syntastic_python_checkers = ['python', 'pep8', 'pylint']
+let g:syntastic_python_checkers = ['python', 'pep8']

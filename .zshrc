@@ -100,9 +100,23 @@ alias gaa="git aa"
 alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 /g' |less"
 alias be="bundle exec"
+
+function wo() {
+    workon $( ls -l ~/ac/Environments | grep '^d' | egrep -o '\S+$' | selecta)
+}
+
+function ac() {
+    cd $(find ~/ac ~/code ~/code/forks -type d -maxdepth 1 | selecta)
+}
+
 function psgrep()
 {
     ps -ef |grep -i $1 | grep -v $$
+}
+
+function kpgrep()
+{
+    ack "$1" -H --noheading ~/ac/kp |selecta | cut -f 1 -d ':' |xargs open
 }
 
 

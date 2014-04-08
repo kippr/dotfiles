@@ -10,12 +10,12 @@
 --exclude="obj"
 --langdef=vb
 --langmap=vb:.vb
---regex-vb=/^[ \t]*(Public|Private|\b)?[ \t]*Sub[ \t]+([a-zA-Z0-9_]+)/\2/s,subroutine/i
---regex-vb=/^[ \t]*(Public|Private|\b)?[ \t]*Function[ \t]+([a-zA-Z0-9_]+)/\2/f,function/i
---regex-vb=/^[ \t]*(Public|Private)?[ \t]+([a-zA-Z0-9_]+)[ \t]+As[ \t]+/\2/v,variable/i
---regex-vb=/^[ \t]*(Public|Private|\b)?[ \t]*Const[ \t]+([a-zA-Z0-9_]+)[ \t]+(As|=)[ \t]+/\2/c,const/i
---regex-vb=/^[ \t]*(Public|\b)?[ \t]*Property[ \t]*(Get|Let|Set)[ \t]+([a-zA-Z0-9_]+)/\3/n,name/i
---regex-vb=/^[ \t]*(Public|Private|\b)?[ \t]*Enum[ \t]+([a-zA-Z0-9_]+)/\2/e,enum/i
+--regex-vb=/^[ \t]*(Public|Private)?[ \t]*Sub[ \t]+([a-zA-Z0-9_]+)/\2/s,subroutine/i
+--regex-vb=/^[ \t]*(Public|Private)?[ \t]*Function[ \t]+([a-zA-Z0-9_]+)/\2/f,function/i
+--regex-vb=/^[ \t]*(Public|Private)[ \t]+([a-zA-Z0-9_]+)[ \t]+As[ \t]+/\2/v,variable/i
+--regex-vb=/^[ \t]*(Public|Private)?[ \t]*Const[ \t]+([a-zA-Z0-9_]+)[ \t]+(As|=)[ \t]+/\2/c,const/i
+--regex-vb=/^[ \t]*(Public)?[ \t]*Property[ \t]*(Get|Let|Set)[ \t]+([a-zA-Z0-9_]+)/\3/n,name/i
+--regex-vb=/^[ \t]*(Public|Private)?[ \t]*Enum[ \t]+([a-zA-Z0-9_]+)/\2/e,enum/i
 #--regex-vb=/^[ \t]*([a-zA-Z_]+):/\1/l,label/i
 --recurse
 --fields=+ianmzS
