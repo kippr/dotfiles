@@ -116,7 +116,7 @@ function psgrep()
 
 function kpgrep()
 {
-    ack "$1" -H --noheading ~/ac/kp |selecta | cut -f 1 -d ':' |xargs open
+    ack "$1" -H --noheading ~/ac/kp |selecta | cut -f 1 -d ':' | sed 's/.*/"&"/' | xargs open
 }
 
 
