@@ -56,7 +56,7 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%} $(venv-prompt) $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='$(venv-prompt) %{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
 
 [ -n "$TMUX" ] && export TERM=screen-256color
 
@@ -102,11 +102,14 @@ alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 alias be="bundle exec"
 
 function wo() {
-    workon $( ls -l ~/ac/Environments | grep '^d' | egrep -o '\S+$' | selecta)
-}
-
-function ac() {
-    cd $(find ~/ac ~/code ~/code/forks -type d -maxdepth 1 | selecta)
+    chosen=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1 | selecta)
+    chosen_dir=$(echo "$chosen" | cut -d '/' -f 5)
+    for ve in $(workon); do
+        if [ "$ve" = "$chosen_dir" ]; then
+            workon $ve
+        fi
+    done
+    pushd $chosen
 }
 
 function psgrep()
