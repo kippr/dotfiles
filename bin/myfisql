@@ -1,0 +1,5 @@
+#fisql -w 200 -s '~' -c ';' $* |sed -e "2d;" |transpose -d '~' | transpose -p
+#bsqldb -t '~' $* |sed -e "2d;" |transpose -d '~' | transpose -p
+#bsqldb -t '~' $* |transpose -d '~' | transpose -p
+#bsqldb -t '~' $* |transpose -d '~' | transpose -p
+bsqldb -h -t '~' $*  | egrep -v '^[-  ]{10,}' |column -t -s '~'
