@@ -102,7 +102,8 @@ alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 alias be="bundle exec"
 
 function wo() {
-    chosen=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1 | selecta)
+    if [ -n "$1" ] ; then selecta_args="--search $1"; fi
+    chosen=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1 | selecta $selecta_args)
     chosen_dir=$(echo "$chosen" | cut -d '/' -f 5)
     for ve in $(workon); do
         if [ "$ve" = "$chosen_dir" ]; then
