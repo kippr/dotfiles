@@ -36,6 +36,8 @@ export HISTFILE=~/.history
 
 export KNIFE_USER=kippr
 
+export MP1=2811
+
 # RVM
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
@@ -100,6 +102,7 @@ alias gaa="git aa"
 alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 /g' |less"
 alias be="bundle exec"
+alias ccat='pygmentize -g'
 
 function wo() {
     if [ -n "$1" ] ; then selecta_args="--search $1"; fi

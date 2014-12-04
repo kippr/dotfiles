@@ -9,6 +9,10 @@
 	attributesfile = /Users/kip/.gitattributes
 [color "diff"]
 	whitespace = blue reverse
+[pager]
+        diff = /Users/kip/bin/diff-highlight | less
+        log = /Users/kip/bin/diff-highlight | less
+        show = /Users/kip/bin/diff-highlight | less
 [alias]
     aa = add --all
 	co = checkout
