@@ -51,3 +51,5 @@
     default = current
 [init]
 	templatedir = ~/.git_template
+[branch "*branch-name*"]
+	rebase = true

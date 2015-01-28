@@ -261,8 +261,6 @@ set tags=~/.ctags-data
 "au BufWritePost *.py,*.rb silent! !nice ctags -R ~/ac/* ~/code/* &
 
 
-let g:CommandTMaxFiles=40000
-
 
 
 " enable Gary Bernhardt's python complexity gutter by default
@@ -272,6 +270,41 @@ let g:CommandTMaxFiles=40000
 "" http://forrst.com/posts/Use_w_to_sudo_write_a_file_with_Vim-uAN
 " Sudo to write
 cmap w!! w !sudo tee % >/dev/null
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""   Random stuff      """"""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! DoPrettyXML()
+  " save the filetype so we can restore it later
+  let l:origft = &ft
+  set ft=
+  " delete the xml header if it exists. This will
+  " permit us to surround the document with fake tags
+  " without creating invalid xml.
+  1s/<?xml .*?>//e
+  " insert fake tags around the entire document.
+  " This will permit us to pretty-format excerpts of
+  " XML that may contain multiple top-level elements.
+  0put ='<PrettyXML>'
+  $put ='</PrettyXML>'
+  silent %!xmllint --format -
+  " xmllint will insert an <?xml?> header. it's easy enough to delete
+  " if you don't want it.
+  " delete the fake tags
+  2d
+  $d
+  " restore the 'normal' indentation, which is one extra level
+  " too deep due to the extra tags we wrapped around the document.
+  silent %<
+  " back to home
+  1
+  " restore the filetype
+  exe "set ft=" . l:origft
+endfunction
+command! PrettyXML call DoPrettyXML()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Run tests/ specs  """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -351,9 +384,6 @@ nnoremap <leader>x :quit<cr>
 
 nnoremap <leader>c :cclose<cr><cr>
 
-nnoremap <leader>T :CommandTFlush<cr>:CommandT<cr>
-nnoremap <leader>t :CommandT<cr>
-
 " run one rspec example or describe block based on cursor position
 nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 " run full rspec file
@@ -390,12 +420,24 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
   exec a:vim_command . " " . selection
 endfunction
 
+
+function! SelectaBuffer()
+  redir => bufs
+    silent buffers
+  redir END
+  try
+    exec ":b " . system("vim-selecta-buffer", bufs)
+  catch /Vim:Interrupt/
+  endtry
+  redraw!
+endfunction
+
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":e")<cr>
+nnoremap <leader>b :call SelectaBuffer()<cr>
 
 
-""" passwords not in public dotfile
 source /Users/kip/Tools/private-dotfiles/dbext-config.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
