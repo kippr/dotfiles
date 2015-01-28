@@ -357,7 +357,7 @@ nnoremap <leader>t :CommandT<cr>
 " run one rspec example or describe block based on cursor position
 nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 " run full rspec file
-nnoremap <leader>s :call RunRspec(" % ")<cr>
+"nnoremap <leader>s :call RunRspec(" % ")<cr>
 nnoremap <leader>a :call RunRspec("")
 
 nnoremap <leader>r :call RunSingleDjangoTest(1)<cr><cr>
@@ -375,6 +375,29 @@ nnoremap <leader>n :cn<cr>
 nnoremap <leader>p :cp<cr>
 
 
+" Run a given vim command on the results of fuzzy selecting from a given shell
+" command. See usage below.
+function! SelectaCommand(choice_command, selecta_args, vim_command)
+  try
+    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+  catch /Vim:Interrupt/
+    " Swallow the ^C so that the redraw below happens; otherwise there will be
+    " leftovers from selecta on the screen
+    redraw!
+    return
+  endtry
+  redraw!
+  exec a:vim_command . " " . selection
+endfunction
+
+" Find all files in all non-dot directories starting in the working directory.
+" Fuzzy select one of those. Open the selected file with :e.
+nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":e")<cr>
+
+
+""" passwords not in public dotfile
+source /Users/kip/Tools/private-dotfiles/dbext-config.vim
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -387,3 +410,6 @@ filetype plugin indent on
 
 let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_python_checkers = ['python', 'pep8']
+
+
+
