@@ -1,2 +1,3 @@
 --smart-case
 --ignore-dir=.ENV
+--ignore-dir=.sentry_local_cache
