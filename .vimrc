@@ -154,6 +154,7 @@ set laststatus=2
 if version >= 703
   set numberwidth=3
   set relativenumber
+  set number
   set undofile
 endif
 
