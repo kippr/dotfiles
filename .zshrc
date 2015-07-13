@@ -18,8 +18,8 @@ export MYSQL=/Applications/MAMP/Library/bin/mysql
 # kp: rainy: without this, mysql-python can't find deps. Another way to do that?
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
-#export DJANGO_SETTINGS_MODULE=crmweb.settings
-export DJANGO_SETTINGS_MODULE=misweb.settings
+export DJANGO_SETTINGS_MODULE=crmweb.settings.local-mac
+#export DJANGO_SETTINGS_MODULE=misweb.settings
 export PROJ_ROOT=~/ac
 
 # virtualenv
@@ -114,6 +114,12 @@ function wo() {
         fi
     done
     pushd $chosen
+}
+
+function cds() {
+    if [ -n "$1" ] ; then selecta_args="--search $1"; fi
+    cd $(find . -type d | selecta $selecta_args)
+    selecta_args=""
 }
 
 function psgrep()

@@ -437,9 +437,10 @@ endfunction
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":e")<cr>
 nnoremap <leader>b :call SelectaBuffer()<cr>
+nnoremap <leader>g :call SelectaCommand("git status --short \| cut -c 4-", "", ":e")<cr>
 
 
-source /Users/kip/Tools/private-dotfiles/dbext-config.vim
+source /Users/kip/code/Tools/private-dotfiles/dbext-config.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""   Plugin defs  """""""""""""""""""""""""""""""""""""""""""""""""""""""""
