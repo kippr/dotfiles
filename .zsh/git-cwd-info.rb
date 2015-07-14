@@ -44,13 +44,13 @@ def rebasing_etc
   end
 end
 
-def clean? 
+def clean?
   @uncommitted ||= `git status --short`.empty?
 end
 
 
 def git_mins_since_commit
-  "#{mins_since_commit}m" unless clean? 
+  "#{mins_since_commit}m" unless clean?
 end
 
 def mins_since_commit
@@ -61,5 +61,5 @@ def mins_since_commit
 end
 
 if in_git_repo
-  print " %{\e[90m%}#{git_parse_branch} %{\e[37m%}#{git_head_commit_id}%{\e[0m%}#{rebasing_etc}#{git_cwd_dirty} #{git_mins_since_commit}"
+  print " %{\e[90m%}#{git_parse_branch} %{\e[90m%}#{git_head_commit_id}%{\e[0m%}#{rebasing_etc}#{git_cwd_dirty} #{git_mins_since_commit}"
 end

@@ -12,8 +12,8 @@ export PATH=/usr/local/bin:${PATH}
 # todo: kp: put symlinks in /usr/local/bin instead?
 export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/local/mysql/bin/:~/ac/bin
 
-export MYSQLDUMP=/Applications/MAMP/Library/bin/mysqldump
-export MYSQL=/Applications/MAMP/Library/bin/mysql
+export MYSQLDUMP=/usr/local/bin/mysqldump
+export MYSQL=/usr/local/bin/mysql
 
 # kp: rainy: without this, mysql-python can't find deps. Another way to do that?
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
@@ -58,7 +58,8 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='$(venv-prompt) %{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
+#RPROMPT='$(venv-prompt) %{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='$(venv-prompt) %{$fg[white]%} $(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
 
 [ -n "$TMUX" ] && export TERM=screen-256color
 
@@ -91,6 +92,9 @@ fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
+# use gnu readlink in my shell
+alias readlink=greadlink
+
 alias ll="ls -lah"
 alias lr="ls -lahtr"
 
@@ -113,6 +117,7 @@ function wo() {
             workon $ve
         fi
     done
+    if [ -n "$1" ] ; then unset selecta_args ; fi
     pushd $chosen
 }
 
@@ -160,3 +165,5 @@ function t()
     return $x
 }
 
+
+. <(gr completion)
