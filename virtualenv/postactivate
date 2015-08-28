@@ -5,7 +5,8 @@
 # Remove virtual env from start of PS1 as it's in RPROMPT instead
 PS1="$_OLD_VIRTUAL_PS1"
 
-PROJECT_DIR="${PROJ_ROOT}/$(basename $VIRTUAL_ENV)"
+PRJ=$(basename $VIRTUAL_ENV)
+PROJECT_DIR="${PROJ_ROOT}/$PRJ"
 if [ -d $PROJECT_DIR ]; then
     # If we aren't already within the project dir, cd into it
     if [[ ! `pwd` == "$PROJECT_DIR*" ]]; then
@@ -14,3 +15,4 @@ if [ -d $PROJECT_DIR ]; then
     fi
 fi
 unset PROJECT_DIR
+tmux rename-window $PRJ
