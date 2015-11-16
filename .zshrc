@@ -10,7 +10,7 @@ if [[ -d /usr/local/share/python ]] ; then export PATH=${PATH}:/usr/local/share/
 export PATH=/usr/local/bin:${PATH}
 
 # todo: kp: put symlinks in /usr/local/bin instead?
-export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/local/mysql/bin/:~/ac/bin
+export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/local/mysql/bin:~/ac/bin
 
 export MYSQLDUMP=/usr/local/bin/mysqldump
 export MYSQL=/usr/local/bin/mysql
@@ -50,6 +50,10 @@ setopt HIST_IGNORE_ALL_DUPS
 #setopt HIST_FIND_NO_DUPS
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+
+
+# disable ctrl-s  (used to pause terminal updates)
+stty -ixon
 
 # Prompt
 local smiley="%(?,%{$fg[green]%}☺%{$reset_color%},%{$fg[red]%}☹%{$reset_color%})"
@@ -108,10 +112,13 @@ alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 alias be="bundle exec"
 alias ccat='pygmentize -g'
 
+alias pbc='pbcopy'
+alias pbp='pbpaste'
+
 function wo() {
     if [ -n "$1" ] ; then selecta_args="--search $1"; fi
     chosen=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1 | selecta $selecta_args)
-    chosen_dir=$(echo "$chosen" | cut -d '/' -f 5)
+    chosen_dir=$(echo "$chosen" | rev | cut -d '/' -f 1 | rev)
     for ve in $(workon); do
         if [ "$ve" = "$chosen_dir" ]; then
             workon $ve
