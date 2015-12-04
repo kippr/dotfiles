@@ -43,6 +43,10 @@
 	textconv = dump-docx.sh
 [diff "xlsx"]
 	textconv = dump-xlsx.sh
+[diff "prettyxml"]
+    textconv = xml fo
+[diff "xml2yaml"]
+    textconv = to -o .yml -i
 [diff]
 	tool = vimdiff
 [remote "origin"]

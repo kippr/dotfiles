@@ -2,3 +2,5 @@
 *.tgz diff=tgz
 *.xlsx diff=xlsx
 *.docx diff=docx
+*.xml diff=prettyxml
+#*.xml diff=xml2yaml
