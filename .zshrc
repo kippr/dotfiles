@@ -18,7 +18,7 @@ export MYSQL=/usr/local/bin/mysql
 # kp: rainy: without this, mysql-python can't find deps. Another way to do that?
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
-export DJANGO_SETTINGS_MODULE=crmweb.settings.local-mac
+#export DJANGO_SETTINGS_MODULE=crmweb.settings.local-mac
 #export DJANGO_SETTINGS_MODULE=misweb.settings
 export PROJ_ROOT=~/ac
 
@@ -56,11 +56,14 @@ setopt SHARE_HISTORY
 stty -ixon
 
 # Prompt
-local smiley="%(?,%{$fg[green]%}☺%{$reset_color%},%{$fg[red]%}☹%{$reset_color%})"
+local bg_jobs="%(1j,$fg[blue],$fg[green])"
+local happy=" ❃ "
+local sad="ಠ_ಠ"
+local smiley="%(?,${happy},${sad})%{$reset_color%}"
 
 PROMPT='
 %~
-${smiley}  %{$reset_color%}'
+${bg_jobs}${smiley}  %{$reset_color%}'
 
 #RPROMPT='$(venv-prompt) %{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
 RPROMPT='$(venv-prompt) %{$fg[white]%} $(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
@@ -112,8 +115,8 @@ alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 alias be="bundle exec"
 alias ccat='pygmentize -g'
 
-alias pbc='pbcopy'
-alias pbp='pbpaste'
+alias pbc=pbcopy
+alias pbp=pbpaste
 
 function wo() {
     if [ -n "$1" ] ; then selecta_args="--search $1"; fi
