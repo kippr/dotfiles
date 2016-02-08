@@ -175,11 +175,11 @@ nmap <space> :nohlsearch<cr>zz
 nnoremap <tab> %
 vnoremap <tab> %
 
-inoremap <C-Space> <C-O>za
-nnoremap <C-Space> za
-onoremap <C-Space> <C-C>za
-vnoremap <C-Space> zf
-map <C-@> <C-Space>
+"inoremap <C-Space> <C-O>za
+"nnoremap <C-Space> za
+"onoremap <C-Space> <C-C>za
+"vnoremap <C-Space> zf
+"map <C-@> <C-Space>
 
 " long line handling
 set wrap
@@ -349,14 +349,28 @@ function! RunDjangoTests(test_file, use_make)
     execute cmd
 endfunction
 
-function! RunPythonTest(args)
-    let cmd = ":wa!\n!nosetests -m \"((?:^\|[_.-])(:?[tT]est\|When\|should))\"" . a:args
-    execute cmd
-    if v:shell_error
-        call RedBar()
+function! RunPythonTests(test_file, use_make)
+    " add -s to make stdout print
+    " Switch to nose compiler file
+    if (a:use_make == 0)
+        echo "Using Dispatch, value of make: " . a:use_make . ", value of test_file: " . a:test_file
+        let cmd = ":wa! | Dispatch . ~/ac/Environments/MIS/bin/activate && nosetests -m \"((?:^\|[_.-])(:?[tT]est\|When\|should))\" " . a:test_file
+        "let cmd = ":wa! | Dispatch . ~/ac/Environments/CreditMon/bin/activate && REUSE_DB=1 ~/ac/CredtMon/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:test_file
     else
-        call GreenBar()
+        let cmd = ":wa!\n!nosetests -m \"((?:^\|[_.-])(:?[tT]est\|When\|should))\" " . a:test_file
     end
+    "sleep 3
+    execute cmd
+endfunction
+
+function! RunSinglePythonTest(use_make)
+    let in_test_file = match(expand("%"), '\([Tt]est\(s\)\?.py\)$') != -1
+    if in_test_file
+        let t:test_file=@%
+    elseif !exists("t:test_file")
+        return
+    end
+    call RunPythonTests(t:test_file, a:use_make)
 endfunction
 
 " and this from Gary Bernhardt
@@ -394,6 +408,10 @@ nnoremap <leader>a :call RunRspec("")
 nnoremap <leader>r :call RunSingleDjangoTest(1)<cr><cr>
 nnoremap <leader><c-r> :call RunSingleDjangoTest(0)<cr><cr>
 nnoremap <leader>R :call RunDjangoTests("", 1)<cr><cr>
+
+nnoremap <leader>s :call RunSinglePythonTest(0)<cr><cr>
+nnoremap <leader><c-s> :call RunSinglePythonTest(1)<cr><cr>
+nnoremap <leader>S :call RunPythonTests("", 0)<cr><cr>
 
 "nnoremap <leader>f :set fullscreen!<cr>
 nnoremap <leader>f :FixWhitespace<cr>

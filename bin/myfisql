@@ -4,4 +4,3 @@
 #bsqldb -t '~' $* |transpose -d '~' | transpose -p
 #bsqldb -h -t '\t' $*  | egrep -v '^[-  ]{10,}' |column -t -s '	'
 bsqldb -h -t '\t' $*  | egrep -v '^[-  ]{10,}'
-

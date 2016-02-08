@@ -1,6 +1,6 @@
 #!/bin/zsh
 # This hook is run after a new virtualenv is created and before it is activated.
 SETTING_MODULE=$(echo $1 | tr '[:upper:]' '[:lower:]')
-echo "export DJANGO_SETTINGS_MODULE=${SETTING_MODULE}.settings.dev" >> "$1/bin/postactivate"
+echo "export DJANGO_SETTINGS_MODULE=${SETTING_MODULE}.settings.dev-mac" >> "$1/bin/postactivate"
 echo "echo \"DJANGO_SETTINGS_MODULE: \$DJANGO_SETTINGS_MODULE\"" >> "$1/bin/postactivate"
 

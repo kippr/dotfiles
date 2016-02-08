@@ -21,6 +21,7 @@
 	stat = status
 	st = status
 	s  = status
+    f = fetch
     l  = "!. ~/.githelpers && pretty_git_log --all"
     r  = "!git l -30"
 	ll = log --stat --graph --decorate --all
