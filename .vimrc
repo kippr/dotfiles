@@ -183,10 +183,10 @@ vnoremap <tab> %
 
 " long line handling
 set wrap
-set textwidth=129
+set textwidth=120
 set formatoptions=qrn1
 if version >= 703
-  set colorcolumn=131
+  set colorcolumn=121
 endif
 
 "set statusline=%{fugitive#statusline()}
@@ -400,12 +400,16 @@ nnoremap <leader>x :quit<cr>
 nnoremap <leader>c :cclose<cr><cr>
 
 " run one rspec example or describe block based on cursor position
-nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
+"nnoremap <leader>S :call RunRspec(" % -l " . <C-r>=line('.')<CR>)<cr>
 " run full rspec file
 "nnoremap <leader>s :call RunRspec(" % ")<cr>
-nnoremap <leader>a :call RunRspec("")
+"nnoremap <leader>a :call RunRspec("")
 
-nnoremap <leader>r :call RunSingleDjangoTest(1)<cr><cr>
+nnoremap <leader>s :call RunSinglePythonTest(0)<cr><cr>
+nnoremap <leader>S :call RunPythonTests("", 0)<cr><cr>
+
+
+nnoremap <leader>r :call RunSingleDjangoTest(0)<cr><cr>
 nnoremap <leader><c-r> :call RunSingleDjangoTest(0)<cr><cr>
 nnoremap <leader>R :call RunDjangoTests("", 1)<cr><cr>
 
@@ -422,6 +426,10 @@ nnoremap <leader>C :SyntasticReset<cr>
 " quickfix nav
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>p :cp<cr>
+
+
+" jedi-vim remaps
+"let g:jedi#rename_command = "<leader>N"
 
 
 " Run a given vim command on the results of fuzzy selecting from a given shell
