@@ -56,7 +56,7 @@ setopt SHARE_HISTORY
 stty -ixon
 
 # Prompt
-local bg_jobs="%(1j,$fg[blue],$fg[green])"
+local bg_jobs="%(1j,%{$fg[blue]%},%{$fg[green]%})"
 local happy=" ❃ "
 local sad="ಠ_ಠ"
 local smiley="%(?,${happy},${sad})%{$reset_color%}"
