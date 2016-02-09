@@ -148,6 +148,18 @@ function kpgrep()
 }
 
 
+# patience is a virtue
+function piav()
+{
+    chosen=$(jobs|grep suspended | selecta | cut -c 2)
+    job_title=$(jobs|grep "[${chosen}]"| cut -c 19-)
+    echo "Will ping you when [$chosen] \"$job_title\" completes"
+    bg;
+    wait "%${chosen}";
+    osascript -e "display notification \"Finished running ${job_title}\" with title \"Job ${chosen} done.\""
+}
+
+
 if [ -d ~/ac/.conf.d ] ; then
     source ~/ac/.conf.d/.bashrc.common
     source ~/ac/.conf.d/.bashrc.avoca
