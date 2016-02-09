@@ -485,6 +485,10 @@ function! LargeFile()
  autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
 endfunction
 
+
+" use ag instead of ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 source /Users/kip/code/Tools/private-dotfiles/dbext-config.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
