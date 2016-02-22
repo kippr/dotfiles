@@ -1,5 +1,19 @@
 {
   "tags": {
+    "c": [
+      "/Users/kip/ac/Batch",
+      "/Users/kip/ac/CreditMon",
+      "/Users/kip/ac/CreditQB",
+      "/Users/kip/ac/Management",
+      "/Users/kip/ac/marvin",
+      "/Users/kip/ac/slrp",
+      "/Users/kip/ac/pwm",
+      "/Users/kip/Personal",
+      "/Users/kip/Weldam",
+      "/Users/kip/admin",
+      "/Users/kip/code/Tools",
+      "/Users/kip/code/dotfiles"
+    ],
     "config": [
       "/Users/kip/Tools",
       "/Users/kip/ac/Alfred",
@@ -68,18 +82,7 @@
       "/Users/kip/ac/nagios",
       "/Users/kip/ac/puppet",
       "/Users/kip/ac/pwm",
-      "/Users/kip/code/Tools/private-dotfiles"
-    ],
-    "w": [
-      "/Users/kip/ac/Batch",
-      "/Users/kip/ac/CreditMon",
-      "/Users/kip/ac/CreditQB",
-      "/Users/kip/ac/FeedDaemon",
-      "/Users/kip/ac/MIS",
-      "/Users/kip/ac/Management",
-      "/Users/kip/ac/kp",
-      "/Users/kip/ac/marvin",
-      "/Users/kip/ac/pwm"
+      "/Users/kip/code/Tools"
     ],
     "p": [
       "/Users/kip/code/FocusPull",
