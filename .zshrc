@@ -15,6 +15,9 @@ export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/
 export MYSQLDUMP=/usr/local/bin/mysqldump
 export MYSQL=/usr/local/bin/mysql
 
+# where? java you're embarrassing yourself
+export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
+
 # kp: rainy: without this, mysql-python can't find deps. Another way to do that?
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
