@@ -58,3 +58,8 @@
 	templatedir = ~/.git_template
 [branch "*branch-name*"]
 	rebase = true
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
