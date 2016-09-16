@@ -9,6 +9,9 @@ endif
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
+
+" use system clipboard by default
+set clipboard=unnamed
 "
 syntax enable
 
