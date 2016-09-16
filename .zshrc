@@ -68,8 +68,19 @@ PROMPT='
 %~
 ${bg_jobs}${smiley}  %{$reset_color%}'
 
-#RPROMPT='$(venv-prompt) %{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
-RPROMPT='$(venv-prompt) %{$fg[white]%} $(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
+function preexec() {
+  timer=${timer:-$SECONDS}
+}
+
+function precmd() {
+  if [ $timer ]; then
+    timer_show=$(($SECONDS - $timer))
+    TIME_PROMPT="%F{cyan}${timer_show}s %{$reset_color%} "
+    unset timer
+  else
+  fi
+}
+RPROMPT='${TIME_PROMPT}$(venv-prompt) %{$fg[white]%} $(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
 
 [ -n "$TMUX" ] && export TERM=screen-256color
 
