@@ -134,6 +134,7 @@ alias gi="clear && /usr/bin/git"
 alias gd="git diff"
 #alias gr="git r"
 alias gaa="git aa"
+alias gf="git fetch"
 alias test_results="cat /tmp/last_build.out| sed 's/\\n/
 /g' |less"
 alias be="bundle exec"
@@ -144,16 +145,21 @@ alias pbp=pbpaste
 
 function wo() {
     if [ -n "$1" ] ; then selecta_args="--search $1"; fi
-    chosen=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1 | selecta $selecta_args)
+    choices=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1)
+    chosen=$(echo "$choices\n/Users/kip/Weldam\n/Users/kip/Personal\n/Users/kip/admin"| selecta $selecta_args)
     chosen_dir=$(echo "$chosen" | rev | cut -d '/' -f 1 | rev)
     for ve in $(workon); do
         if [ "$ve" = "$chosen_dir" ]; then
             workon $ve
+            break;
         fi
     done
     if [ -n "$1" ] ; then unset selecta_args ; fi
     pushd $chosen
 }
+zle -N wo
+bindkey "^w" "wo"
+
 
 function cds() {
     if [ -n "$1" ] ; then selecta_args="--search $1"; fi
@@ -182,6 +188,29 @@ function piav()
     wait "%${chosen}";
     osascript -e "display notification \"Finished running ${job_title}\" with title \"Job ${chosen} done.\""
 }
+
+
+# https://github.com/garybernhardt/dotfiles/blob/68554d69652cc62d43e659f2c6b9082b9938c72e/.zshrc#L122
+# By default, ^S freezes terminal output and ^Q resumes it. Disable that so
+# that those keys can be used for other things.
+unsetopt flowcontrol
+# Run Selecta in the current working directory, appending the selected path, if
+# any, to the current command.
+function insert-selecta-path-in-command-line() {
+    local selected_path
+    # Print a newline or we'll clobber the old prompt.
+    echo
+    # Find the path; abort if the user doesn't select anything.
+    selected_path=$(find * -type f | selecta) || return
+    # Append the selection to the current command buffer.
+    eval 'LBUFFER="$LBUFFER$selected_path"'
+    # Redraw the prompt since Selecta has drawn several new lines of text.
+    zle reset-prompt
+}
+# Create the zle widget
+zle -N insert-selecta-path-in-command-line
+# Bind the key to the newly created widget
+bindkey "^S" "insert-selecta-path-in-command-line"
 
 
 if [ -d ~/ac/.conf.d ] ; then
