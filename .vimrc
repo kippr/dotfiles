@@ -335,15 +335,16 @@ function! RunSingleDjangoTest(use_make)
     elseif !exists("t:test_file")
         return
     end
-    call RunDjangoTests(t:test_file, a:use_make)
+    call RunDjangoTests(t:test_file, 0)
 endfunction
 
 function! RunDjangoTests(test_file, use_make)
     " add -s to make stdout print
     " Switch to nose compiler file
-    if (match(a:test_file, 'misweb') == -1 || a:use_make == 0)
+    if (match(a:test_file, 'creditqb') == -1 || a:use_make == 0)
         echo "Using Dispatch, value of make: " . a:use_make . ", value of test_file: " . a:test_file
-        let cmd = ":wa! | Dispatch . ~/ac/Environments/MIS/bin/activate && REUSE_DB=1 ~/ac/MIS/misweb/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" --with-fixture-bundling " . a:test_file
+        "let cmd = ":wa! | Dispatch . ~/ac/Environments/trialanderror/bin/activate && REUSE_DB=1 ~/ac/trialanderror/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        let cmd = ":wa! | Dispatch . ~/ac/Environments/CreditQB/bin/activate && REUSE_DB=1 nosetests -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
     else
         echo "Using Make"
         let cmd = ":wa! | Make " . a:test_file
