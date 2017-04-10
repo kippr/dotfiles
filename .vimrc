@@ -85,8 +85,6 @@ if has("autocmd")
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -191,6 +189,9 @@ set formatoptions=qrn1
 if version >= 703
   set colorcolumn=121
 endif
+
+" For all text files set 'textwidth' 
+autocmd FileType text setlocal textwidth=120
 
 "set statusline=%{fugitive#statusline()}
 
