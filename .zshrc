@@ -103,11 +103,18 @@ compinit
 bindkey -v
 bindkey "jj" vi-cmd-mode
 bindkey "^R" history-incremental-search-backward
+# without next line we need to wait for vi mode to kick in
+export KEYTIMEOUT=1
+
+
 
 # flip into vi for editing command with v
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
+
+
+
 
 # Smart pane switching with awareness of vim splits
 # I should be able to add this to .tmux.conf but its being ignored there?
@@ -120,6 +127,26 @@ if [ $(tmux has-session > /dev/null 2>&1) ] ; then
     tmux bind-key -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
     tmux bind-key -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
 fi
+
+function bind_leader_key() {
+    # don't quite have this version working for some reason :( but can get split window anyway..
+    #tmux bind-key -n \\ command-prompt -p '\\' "run '~/bin/cmd-line-leader-commands %%'"
+    tmux bind-key -n \\ run 'tmux split-window -h'
+}
+
+function unbind_leader_key() {
+    tmux unbind-key -n \\
+}
+
+zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) bind_leader_key;;
+        viins|main) unbind_leader_key;;
+      esac
+}
+zle -N zle-keymap-select
+
+
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
