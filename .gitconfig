@@ -48,6 +48,8 @@
     textconv = xml fo
 [diff "xml2yaml"]
     textconv = to -o .yml -i
+[diff "ipynb"]
+    textconv = dump-ipynb.sh
 [diff]
 	tool = vimdiff
 [remote "origin"]
