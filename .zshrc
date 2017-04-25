@@ -123,31 +123,33 @@ if [ $(tmux has-session > /dev/null 2>&1) ] ; then
     tmux bind-key -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-k) || tmux select-pane -U"
     tmux bind-key -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
     tmux bind-key -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+    tmux bind-key -n C-w split-window -h
+    tmux bind-key -n C-v split-window
 fi
 
 
-function vi-split-window() {
-    tmux split-window -h
-}
-zle -N vi-split-window
-function vi-split-window-h() {
-    tmux split-window
-}
-zle -N vi-split-window-h
-bindkey "^v" vi-split-window-h
-bindkey "^w" vi-split-window
+#function vi-split-window() {
+#    tmux split-window -h
+#}
+#zle -N vi-split-window
+#function vi-split-window-h() {
+#    tmux split-window
+#}
+#zle -N vi-split-window-h
+#bindkey "^v" vi-split-window-h
+#bindkey "^w" vi-split-window
 
 
 function bind_leader_keys() {
     # don't quite have this version working for some reason :( but can get split window anyway..
     #tmux bind-key -n \\ command-prompt -p '\\' "run '~/bin/cmd-line-leader-commands %%'"
     #tmux bind-key -n \\ run 'tmux split-window -h'
-    bindkey "\w" vi-split-window
+    #bindkey "\w" vi-split-window
 }
 
 function unbind_leader_keys() {
     #tmux unbind-key -n \\
-    bindkey -r "\w"
+    #bindkey -r "\w"
 }
 
 
@@ -158,7 +160,7 @@ zle-keymap-select () {
       esac
 }
 ## disable this attempt at 'binding leader key' when zsh is in command mode
-#zle -N zle-keymap-select
+zle -N zle-keymap-select
 
 
 
