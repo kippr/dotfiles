@@ -107,13 +107,10 @@ bindkey "^R" history-incremental-search-backward
 export KEYTIMEOUT=1
 
 
-
 # flip into vi for editing command with v
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
-
-
 
 
 # Smart pane switching with awareness of vim splits
@@ -128,23 +125,40 @@ if [ $(tmux has-session > /dev/null 2>&1) ] ; then
     tmux bind-key -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
 fi
 
-function bind_leader_key() {
+
+function vi-split-window() {
+    tmux split-window -h
+}
+zle -N vi-split-window
+function vi-split-window-h() {
+    tmux split-window
+}
+zle -N vi-split-window-h
+bindkey "^v" vi-split-window-h
+bindkey "^w" vi-split-window
+
+
+function bind_leader_keys() {
     # don't quite have this version working for some reason :( but can get split window anyway..
     #tmux bind-key -n \\ command-prompt -p '\\' "run '~/bin/cmd-line-leader-commands %%'"
-    tmux bind-key -n \\ run 'tmux split-window -h'
+    #tmux bind-key -n \\ run 'tmux split-window -h'
+    bindkey "\w" vi-split-window
 }
 
-function unbind_leader_key() {
-    tmux unbind-key -n \\
+function unbind_leader_keys() {
+    #tmux unbind-key -n \\
+    bindkey -r "\w"
 }
+
 
 zle-keymap-select () {
     case $KEYMAP in
-        vicmd) bind_leader_key;;
-        viins|main) unbind_leader_key;;
+        vicmd) bind_leader_keys;;
+        viins|main) unbind_leader_keys;;
       esac
 }
-zle -N zle-keymap-select
+## disable this attempt at 'binding leader key' when zsh is in command mode
+#zle -N zle-keymap-select
 
 
 
@@ -184,8 +198,8 @@ function wo() {
     if [ -n "$1" ] ; then unset selecta_args ; fi
     pushd $chosen
 }
-zle -N wo
-bindkey "^w" "wo"
+#zle -N wo
+#bindkey "^w" "wo"
 
 
 function cds() {
