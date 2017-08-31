@@ -35,8 +35,10 @@ function venv-prompt() {
 function frameworkpython {
     if [[ ! -z "$VIRTUAL_ENV" ]]; then
         PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
+        #PYTHONHOME=$VIRTUAL_ENV /usr/bin/python "$@"
     else
         /usr/local/bin/python "$@"
+        #/usr/bin/python "$@"
     fi
 }
 
@@ -115,7 +117,7 @@ bindkey -M vicmd v edit-command-line
 
 # Smart pane switching with awareness of vim splits
 # I should be able to add this to .tmux.conf but its being ignored there?
-if [ $(tmux has-session > /dev/null 2>&1) ] ; then
+#if [ $(tmux has-session > /dev/null 2>&1) ] ; then
     # git part in below is mayby dodgy but when else do I have git active when not using mergetool etc and hit
     # ctrl-l etc
     tmux bind-key -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-h) || tmux select-pane -L"
@@ -125,7 +127,7 @@ if [ $(tmux has-session > /dev/null 2>&1) ] ; then
     tmux bind-key -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
     tmux bind-key -n C-w split-window -h
     tmux bind-key -n C-v split-window
-fi
+#fi
 
 
 #function vi-split-window() {
@@ -191,6 +193,7 @@ function wo() {
     choices=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1)
     chosen=$(echo "$choices\n/Users/kip/Weldam\n/Users/kip/Personal\n/Users/kip/admin"| selecta $selecta_args)
     chosen_dir=$(echo "$chosen" | rev | cut -d '/' -f 1 | rev)
+    tmux rename-window "$chosen_dir"
     for ve in $(workon); do
         if [ "$ve" = "$chosen_dir" ]; then
             workon $ve
