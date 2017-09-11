@@ -65,3 +65,5 @@
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
+[pull]
+	rebase = true
