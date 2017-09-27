@@ -466,7 +466,8 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>t :call SelectaEdit("find * -type f", "")<cr>
+nnoremap <leader>t :call SelectaEdit("/Users/kip/bin/selecta-src-files", "")<cr>
+nnoremap <leader>T :call SelectaEdit("find * -type f", "")<cr>
 nnoremap <leader>b :call SelectaBuffer()<cr>
 nnoremap <leader>g :call SelectaEdit("git status --short \| cut -c 4-", "")<cr>
 

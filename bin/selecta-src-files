@@ -1,0 +1,2 @@
+# find * -type f | grep -v '*[! -~]*' | grep -v '\(.jpg\|.png\)$' | grep -v '\(node_modules/\|tmp/\|bower_components/\)'
+find * \! -name '*.jpg' \! -name '*.png' -type f -o \( -name 'node_modules' -o -name 'bower_components' -o -name 'tmp' -o -name dist \) -prune
