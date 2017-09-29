@@ -6,4 +6,4 @@ jq --indent 1 \
     | .metadata = {"language_info": {"name":"python", "pygments_lexer": "ipython3"}}
     | (.cells[] | select(has("outputs")) | .outputs[0]["data"]["text/html"]) = []
     | (.cells[] | select(has("outputs")) | .outputs[0]["execution_count"]) = null
-    ' $1
+    ' "$1"
