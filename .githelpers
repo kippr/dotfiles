@@ -36,6 +36,7 @@ pretty_git_log() {
         sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
         # convert two word names into abbrev - this could be nicer!
         sed 's/<\([A-Z]\)[a-z ]*\([A-Z]\)[A-Za-z \-]*>/<\1\2>/' |
+        sed 's/patejw/JP/' |
         # Line columns up based on } delimiter
         column -s '}' -t |
         # highlight current location
@@ -55,5 +56,5 @@ checkout_selected_branch() {
 
 show_selected_revision() {
     #git log --all --pretty="tformat:%h}(%ar)}%d %s" | column -s '}' -t | selecta | cut -d ' ' -f 1 | xargs git show
-    git log --all --pretty="tformat:%h (%ar)}%d %s" |  selecta | cut -d ' ' -f 1 | xargs git show
+    git log --all --pretty="tformat:%h (%ar)}%d %s" |  selecta | cut -d ' ' -f 1 | xargs git show -w
 }
