@@ -188,6 +188,7 @@ alias ccat='pygmentize -g'
 alias pbc=pbcopy
 alias pbp=pbpaste
 
+alias horizon_client="open -n /Applications/VMware\ Horizon\ Client.app"
 function wo() {
     if [ -n "$1" ] ; then selecta_args="--search $1"; fi
     choices=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1)
