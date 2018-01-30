@@ -460,10 +460,15 @@ function! SelectaBuffer()
     silent buffers
   redir END
   try
-    exec ":b " . system("vim-selecta-buffer", bufs)
+    let selection = system("vim-selecta-buffer", bufs)
   catch /Vim:Interrupt/
+    redraw!
+    return
   endtry
   redraw!
+  if selection
+    exec ":b " . selection
+  endif
 endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
