@@ -124,9 +124,12 @@ bindkey -M vicmd v edit-command-line
     tmux bind-key -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-j) || tmux select-pane -D"
     tmux bind-key -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-k) || tmux select-pane -U"
     tmux bind-key -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
-    tmux bind-key -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
-    tmux bind-key -n C-w split-window -h
-    tmux bind-key -n C-v split-window
+    #tmux bind-key -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+    #tmux bind-key -n C-w split-window -h
+    #tmux bind-key -n C-v split-window
+#fi
+    tmux bind-key -n C-w run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-w) || tmux split-window -h"
+    tmux bind-key -n C-v run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-v) || tmux split-window"
 #fi
 
 
