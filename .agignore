@@ -1,0 +1,3 @@
+*.generated.sql
+*.CLR.sql
+everest/Assemblies/
