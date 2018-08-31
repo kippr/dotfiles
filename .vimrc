@@ -505,7 +505,7 @@ endfunction
 nnoremap <leader>t :call SelectaEdit("/Users/kip/bin/selecta-src-files", "")<cr>
 nnoremap <leader>T :call SelectaEdit("find * -type f", "")<cr>
 nnoremap <leader>b :call SelectaBuffer()<cr>
-nnoremap <leader>g :call SelectaEdit("git status --short \| cut -c 4-", "")<cr>
+nnoremap <leader>g :call SelectaEdit("git status --short \| sed 's/\"//g' \| tee /tmp/thu \| cut -c 4- ", "")<cr>
 
 
 " large file options
