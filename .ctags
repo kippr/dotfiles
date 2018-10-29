@@ -5,6 +5,7 @@
 --exclude=*/dojo-1.8.1/*
 --exclude=*/dojo-release-1.6.1/*
 --exclude=*/dojo-release-1.6.1-src/*
+--exclude=*.p
 
 --exclude="bin"
 --exclude="obj"

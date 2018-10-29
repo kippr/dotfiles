@@ -5,6 +5,6 @@
 #bsqldb -h -t '\t' $*  | egrep -v '^[-  ]{10,}' |column -t -s '	'
 #bsqldb -h -t '\t' $*  | egrep -v '^[-  ]{10,}'
 #bsqldb -h -t '\t' $*
-#bsqldb -h -t '~' $*
+bsqldb -h -t '~' $*
 #tsql -U ltd -P ltd -S SFSQLSRV5 -D everest_web  -o qf $*
-tsql -o qf $*
+#tsql -o qf $*
