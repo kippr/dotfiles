@@ -485,10 +485,10 @@ endfunction
 
 
 function! SelectaBuffer()
-  redir => bufs
-    silent buffers
-  redir END
   try
+    redir => bufs
+      silent buffers
+    redir END
     let selection = system("vim-selecta-buffer", bufs)
   catch /Vim:Interrupt/
     redraw!

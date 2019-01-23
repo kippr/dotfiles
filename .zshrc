@@ -1,3 +1,9 @@
+# START PROFILE, see https://stackoverflow.com/a/20855353
+#exec 3>&2 2> >( tee /tmp/sample-$$.log |
+#                  sed -u 's/^.*$/now/' |
+#                  date -f - +%s.%N >/tmp/sample-$$.tim)
+#set -x
+
 # DESCRIPTION:
 #   A simple zsh configuration that gives you 90% of the useful features that I use everyday.
 #
@@ -15,6 +21,13 @@ export PATH=${PATH}:/usr/local/Cellar/python/2.7.3/lib/python2.7/distutils:/usr/
 export MYSQLDUMP=/usr/local/bin/mysqldump
 export MYSQL=/usr/local/bin/mysql
 
+# slow:
+#OPENSSL_PREFIX=$(brew --prefix openssl)
+OPENSSL_PREFIX=/usr/local/opt/openssl
+
+export CFLAGS="-I${OPENSSL_PREFIX}/include"
+export LDFLAGS="-L${OPENSSL_PREFIX}/lib"
+
 # where? java you're embarrassing yourself
 export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 
@@ -26,7 +39,7 @@ export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Ho
 export PROJ_ROOT=~/ac
 
 # virtualenv
-export WORKON_HOME=~/ac/Environments
+export WORKON_HOME=/Users/kip/ac/Environments
 source /usr/local/bin/virtualenvwrapper.sh
 function venv-prompt() {
     echo $(basename ${VIRTUAL_ENV:-''})
@@ -34,11 +47,11 @@ function venv-prompt() {
 
 function frameworkpython {
     if [[ ! -z "$VIRTUAL_ENV" ]]; then
-        PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
-        #PYTHONHOME=$VIRTUAL_ENV /usr/bin/python "$@"
+        #PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
+        PYTHONHOME=$VIRTUAL_ENV /usr/bin/python "$@"
     else
-        /usr/local/bin/python "$@"
-        #/usr/bin/python "$@"
+        #/usr/local/bin/python "$@"
+        /usr/bin/python "$@"
     fi
 }
 
@@ -52,7 +65,7 @@ export KNIFE_USER=kippr
 export MP1=2811
 
 # RVM
-if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
+#if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
 # Colors
 autoload -U colors
@@ -291,4 +304,9 @@ function t()
 }
 
 
-. <(gr completion)
+# slow
+#. <(gr completion)
+
+# END PROFILE
+#set +x
+#exec 2>&3 3>&-
