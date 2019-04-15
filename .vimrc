@@ -433,6 +433,8 @@ nnoremap <leader>C :SyntasticReset<cr>
 " quickfix nav
 nnoremap <leader>n :cn<cr>
 nnoremap <leader>p :cp<cr>
+nnoremap <c-r> :cn<cr>
+nnoremap <c-c> :cp<cr>
 
 function! GetBufferList()
   redir =>buflist
