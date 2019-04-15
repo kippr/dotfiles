@@ -1,0 +1,2 @@
+# find * -type f | grep -v '*[! -~]*' | grep -v '\(.jpg\|.png\)$' | grep -v '\(node_modules/\|tmp/\|bower_components/\)'
+find $(python -c "import sys; print(' '.join(x for x in sys.path if x))") -name '*.py' 2>/dev/null
