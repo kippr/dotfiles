@@ -43,3 +43,12 @@
 [submodule ".vim/bundle/ingo-library"]
 	path = .vim/bundle/ingo-library
 	url = https://github.com/vim-scripts/ingo-library.git
+[submodule ".vim/bundle/csv.vim"]
+	path = .vim/bundle/csv.vim
+	url = https://github.com/chrisbra/csv.vim.git
+[submodule ".vim/bundle/dbext.vim"]
+	path = .vim/bundle/dbext.vim
+	url = https://github.com/vim-scripts/dbext.vim.git
+[submodule ".vim/bundle/vim-coffee-script"]
+	path = .vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
