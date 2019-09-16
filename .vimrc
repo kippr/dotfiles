@@ -547,5 +547,9 @@ call pathogen#infect()
 
 filetype plugin indent on
 
+
 let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_python_checkers = ['python', 'pep8']
+"
+" vimwiki stuff
+let g:vimwiki_list = [{'path': '~/Personal/wiki/', 'syntax': 'markdown', 'ext': '.md'}]
