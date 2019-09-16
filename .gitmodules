@@ -28,3 +28,18 @@
 [submodule ".vim/bundle/vim-pep8-indent"]
 	path = .vim/bundle/vim-pep8-indent
 	url = https://github.com/hynek/vim-python-pep8-indent.git
+[submodule ".vim/bundle/ConflictMotions"]
+	path = .vim/bundle/ConflictMotions
+	url = https://github.com/vim-scripts/ConflictMotions.git
+[submodule ".vim/bundle/CountJump"]
+	path = .vim/bundle/CountJump
+	url = https://github.com/vim-scripts/CountJump.git
+[submodule "vim/bundle/vimwiki"]
+	path = vim/bundle/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git
+[submodule ".vim/bundle/vimwiki"]
+	path = .vim/bundle/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git
+[submodule ".vim/bundle/ingo-library"]
+	path = .vim/bundle/ingo-library
+	url = https://github.com/vim-scripts/ingo-library.git
