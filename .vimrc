@@ -402,7 +402,7 @@ endfunction
       \
 "open up new window
 nnoremap <leader>w :vsplit<cr><c-w>l
-nnoremap <leader>W :split<cr><c-w>j
+nnoremap <leader>v :split<cr><c-w>j
 nnoremap <leader>x :quit<cr>
 
 nnoremap <leader>c :cclose<cr><cr>
@@ -553,3 +553,8 @@ let g:syntastic_python_checkers = ['python', 'pep8']
 "
 " vimwiki stuff
 let g:vimwiki_list = [{'path': '~/Personal/wiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" couldn't get this working.. some weird error with users_value not being updated in the custom keys loop in vimwiki/vars.vim
+" forking instead
+"let g:vimwiki_list = [{'path': '~/Personal/wiki/',}]
+"let g:vimwiki_diary_months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December' }
+"let g:vimwiki_map_prefix = '<leader>W'
