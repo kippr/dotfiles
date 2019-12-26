@@ -195,6 +195,8 @@ autocmd FileType text setlocal textwidth=120
 
 autocmd FileType sql setlocal shiftwidth=4 tabstop=4 noexpandtab
 
+autocmd filetype crontab setlocal nobackup nowritebackup
+
 "set statusline=%{fugitive#statusline()}
 
 set foldlevel=99
