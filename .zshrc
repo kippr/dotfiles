@@ -313,3 +313,10 @@ function t()
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/kip/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+
+
+currenttime=$(date +%H:%M)
+if [[ "$currenttime" > "18:00" ]] || [[ "$currenttime" < "08:00" ]]; then
+    /Users/kip/Personal/src/kindle/random-quote.py
+fi
