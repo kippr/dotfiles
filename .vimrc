@@ -134,6 +134,8 @@ set fileformats=unix,dos
 " treatment for RSI
 "inoremap jj <ESC>j
 "inoremap kk <ESC>k
+inoremap jk <ESC>k
+inoremap kj <ESC>j
 let mapleader = "\\"
 nnoremap ; :
 
