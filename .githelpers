@@ -51,7 +51,8 @@ rebase_unpushed() {
 }
 
 checkout_selected_branch() {
-    git branch --all --list | sed 's/^[ ]*remotes\///'|selecta|xargs git checkout
+    #git branch --all --list | sed 's/^[ ]*remotes\///'|egrep -v '^origin/'|selecta|xargs git checkout
+    git branch --all --list | sed 's/^[ ]*remotes\///'|sed 's/^origin\///' | awk '{$1=$1;print}' | sort -u | selecta|xargs git checkout
 }
 
 show_selected_revision() {
