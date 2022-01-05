@@ -82,6 +82,7 @@ setopt SHARE_HISTORY
 stty -ixon
 
 # Prompt
+# 2021-06-04 causing perf issues?
 local bg_jobs="%(1j,%{$fg[blue]%},%{$fg[green]%})"
 local happy=" ❃ "
 local sad="ಠ_ಠ"
@@ -120,6 +121,8 @@ bindkey "jj" vi-cmd-mode
 bindkey "^R" history-incremental-search-backward
 # without next line we need to wait for vi mode to kick in
 export KEYTIMEOUT=1
+
+set -o vi
 
 
 # flip into vi for editing command with v
@@ -196,19 +199,37 @@ alias gd="git diff"
 #alias gr="git r"
 alias gaa="git aa"
 alias gf="git fetch"
-alias test_results="cat /tmp/last_build.out| sed 's/\\n/
-/g' |less"
-alias be="bundle exec"
+alias gs="git status"
 alias ccat='pygmentize -g'
 
 alias pbc=pbcopy
 alias pbp=pbpaste
 
 alias horizon_client="open -n /Applications/VMware\ Horizon\ Client.app"
+
+
+alias pwm="~/ac/pwm/bin/pwm.py"
+
+alias ..="cd .."; alias ...="cd ../.."; alias ....="cd ../../.."; alias .....="cd ../../../.."; alias ......="cd ../../../../.."
+
+function fb() {
+    current_env=$(echo $VIRTUAL_ENV | cut -d'/' -f 6)
+    pushd .
+    pushd .
+    window_name=$(tmux display-message -p '#W')
+    workon AvocaFabric
+    popd
+    echo $*
+    fab $*
+    workon $current_env > /dev/null
+    tmux rename-window "$window_name"
+    popd
+}
+
 function wo() {
     if [ -n "$1" ] ; then selecta_args="--search $1"; fi
     choices=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1)
-    chosen=$(echo "$choices\n/Users/kip/Weldam\n/Users/kip/Personal\n/Users/kip/admin"| selecta $selecta_args)
+    chosen=$(echo "$choices\n/Users/kip/Weldam\n/Users/kip/Personal\n/Users/kip/Personal/wiki\n/Users/kip/admin"| selecta $selecta_args)
     chosen_dir=$(echo "$chosen" | rev | cut -d '/' -f 1 | rev)
     tmux rename-window "$chosen_dir"
     for ve in $(workon); do
