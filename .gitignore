@@ -1,2 +1,7 @@
-.ipython/profile_default/db/
-.ipython/profile_default/history.sqlite.*
+*~
+*.Swp
+*.swo
+.vim/.netrwhist
+history.sqlite
+afiedt.buf
+.DS_Store
