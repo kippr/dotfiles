@@ -192,10 +192,12 @@ if version >= 703
   set colorcolumn=121
 endif
 
-" For all text files set 'textwidth' 
+" For all text files set 'textwidth'
 autocmd FileType text setlocal textwidth=120
 
 autocmd FileType sql setlocal shiftwidth=4 tabstop=4 noexpandtab
+
+autocmd FileType vimwiki setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 
@@ -229,8 +231,8 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
 " disable f1
 inoremap <F1> <ESC>
