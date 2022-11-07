@@ -229,7 +229,7 @@ function fb() {
 function wo() {
     if [ -n "$1" ] ; then selecta_args="--search $1"; fi
     choices=$(find ~/ac ~/code ~/code/forks -type d -maxdepth 1)
-    chosen=$(echo "$choices\n/Users/kip/Weldam\n/Users/kip/Personal\n/Users/kip/Personal/wiki\n/Users/kip/admin"| selecta $selecta_args)
+    chosen=$(echo "$choices\n/Users/kip/Weldam\n/Users/kip/Weldam/Finance/Accounts/Receipts\n/Users/kip/Personal\n/Users/kip/Personal/wiki\n/Users/kip/admin"| selecta $selecta_args)
     chosen_dir=$(echo "$chosen" | rev | cut -d '/' -f 1 | rev)
     tmux rename-window "$chosen_dir"
     for ve in $(workon); do
