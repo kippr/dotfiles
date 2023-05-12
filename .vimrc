@@ -253,7 +253,11 @@ if has("win32") || has("win64")
 endif
 "
 " using Source Code Pro
-set anti enc=utf-8
+if has('nvim')
+    set enc=utf-8
+else
+    set anti enc=utf-8
+endif
 set guifont=Source\ Code\ Pro\ 11
 
 " map ctrl-space to autocomplete - wont' work :( "inoremap <C-Space> <C-p>
@@ -480,16 +484,20 @@ nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
 function! SelectaEdit(choice_command, selecta_args)
-  try
-    let selection = fnameescape(substitute(system(a:choice_command . " | selecta " . a:selecta_args), '\n$', '', 'g'))
-  catch /Vim:Interrupt/
-    " Swallow the ^C so that the redraw below happens; otherwise there will be
-    " leftovers from selecta on the screen
-    redraw!
-    return
-  endtry
-  redraw!
-  exec ":e " . selection
+    if has('nvim')
+        call selecta#command(a:choice_command, a:selecta_args, ":e")
+    else
+      try
+        let selection = fnameescape(substitute(system(a:choice_command . " | selecta " . a:selecta_args), '\n$', '', 'g'))
+      catch /Vim:Interrupt/
+        " Swallow the ^C so that the redraw below happens; otherwise there will be
+        " leftovers from selecta on the screen
+        redraw!
+        return
+      endtry
+      redraw!
+      exec ":e " . selection
+    endif
 endfunction
 
 
@@ -514,8 +522,12 @@ endfunction
 nnoremap <leader>t :call SelectaEdit("/Users/kip/bin/selecta-src-files", "")<cr>
 nnoremap <leader>m :call SelectaEdit("/Users/kip/bin/selecta-python-path", "")<cr>
 nnoremap <leader>T :call SelectaEdit("find * -type f", "")<cr>
-nnoremap <leader>b :call SelectaBuffer()<cr>
 nnoremap <leader>g :call SelectaEdit("git status --short \| sed 's/\"//g' \| tee /tmp/thu \| cut -c 4- ", "")<cr>
+if has('nvim')
+    nnoremap <leader>b <Plug>(selecta-buffer)
+else
+    nnoremap <leader>b :call SelectaBuffer()<cr>
+endif
 
 
 " large file options
