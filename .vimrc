@@ -357,13 +357,15 @@ function! RunDjangoTests(test_file, use_make)
     if (match(a:test_file, 'creditqb') == -1 || a:use_make == 0)
         echo "Using Dispatch, value of make: " . a:use_make . ", value of test_file: " . a:test_file
         "let cmd = ":wa! | Dispatch . ~/ac/Environments/trialanderror/bin/activate && REUSE_DB=1 ~/ac/trialanderror/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
-        "let cmd = ":wa! | Dispatch . ~/ac/Environments/CreditQB/bin/activate && REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
-        let cmd = ":wa! | Dispatch REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        "let cmd = ":wa! | Dispatch . ~/ac/Environments/CreditQB/bin/activate && DJANGO_SETTINGS_MODULE=creditqb.settings.dev REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        let cmd = ":wa! | Dispatch docker exec creditqb nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        "let cmd = ":wa! | Dispatch REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        " echo cmd
     else
         echo "Using Make"
         let cmd = ":wa! | Make " . a:test_file
     end
-    "sleep 3
+    " sleep 3
     execute cmd
 endfunction
 
