@@ -136,10 +136,16 @@ bindkey -M vicmd v edit-command-line
 #if [ $(tmux has-session > /dev/null 2>&1) ] ; then
     # git part in below is mayby dodgy but when else do I have git active when not using mergetool etc and hit
     # ctrl-l etc
-    tmux bind-key -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-h) || tmux select-pane -L"
-    tmux bind-key -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-j) || tmux select-pane -D"
-    tmux bind-key -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-k) || tmux select-pane -U"
-    tmux bind-key -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
+    #tmux bind-key -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(gitx|n?vim)$' && tmux send-keys C-h) || tmux select-pane -L"
+    tmux bind-key -n C-h run "(pstree -p '#{pane_pid}' | grep -iEq ' n?vim ' && tmux send-keys C-h) || tmux select-pane -L"
+    #tmux bind-key -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(gitx|n?vim)$' && tmux send-keys C-j) || tmux select-pane -D"
+    tmux bind-key -n C-j run "(pstree -p '#{pane_pid}' | grep -iEq ' n?vim ' && tmux send-keys C-j) || tmux select-pane -D"
+    #tmux bind-key -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(gitx|n?vim)$' && tmux send-keys C-k) || tmux select-pane -U"
+    tmux bind-key -n C-k run "(pstree -p '#{pane_pid}' | grep -iEq ' n?vim ' && tmux send-keys C-k) || tmux select-pane -U"
+    #tmux bind-key -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(gitx|n?vim)$' && tmux send-keys C-l) || tmux select-pane -R"
+    tmux bind-key -n C-l run "(pstree -p '#{pane_pid}' | grep -iEq ' n?vim ' && tmux send-keys C-l) || tmux select-pane -R"
+    #tmux bind-key -n C-d run "pstree -p '#{pane_pid}' >> /tmp/meh "
+    #tmux bind-key -n C-d run "ps -o command -p '#{pane_pid}' >> /tmp/meh "
     #tmux bind-key -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)(git|vim)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
     #tmux bind-key -n C-w split-window -h
     #tmux bind-key -n C-v split-window
