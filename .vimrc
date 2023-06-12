@@ -214,10 +214,18 @@ set list
 set listchars=tab:▸\ ,eol:¬
 
 " jump around using ctrl-mv keys
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+"nnoremap <silent> {Previoust-Mapping} :TmuxNavigatePrevious<cr>
 
 
 
