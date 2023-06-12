@@ -40,7 +40,9 @@ export PROJ_ROOT=~/ac
 
 # virtualenv
 export WORKON_HOME=/Users/kip/ac/Environments
-source /usr/local/bin/virtualenvwrapper.sh
+if [[ -d /usr/local/bin//virtualenvwrapper.sh ]] ; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 function venv-prompt() {
     echo $(basename ${VIRTUAL_ENV:-''})
 }
