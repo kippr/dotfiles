@@ -35,11 +35,8 @@
 	path = .vim/bundle/CountJump
 	url = https://github.com/vim-scripts/CountJump.git
 [submodule "vim/bundle/vimwiki"]
-	path = vim/bundle/vimwiki
-	url = git@github.com:kippr/vimwiki.git
-[submodule ".vim/bundle/vimwiki"]
 	path = .vim/bundle/vimwiki
-	url = https://github.com/vimwiki/vimwiki.git
+	url = git@github.com:kippr/vimwiki.git
 [submodule ".vim/bundle/ingo-library"]
 	path = .vim/bundle/ingo-library
 	url = https://github.com/vim-scripts/ingo-library.git
