@@ -28,6 +28,9 @@ OPENSSL_PREFIX=/usr/local/opt/openssl
 export CFLAGS="-I${OPENSSL_PREFIX}/include"
 export LDFLAGS="-L${OPENSSL_PREFIX}/lib"
 
+export TEMP=/tmp
+export TMP=/tmp
+
 # where? java you're embarrassing yourself
 export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 
@@ -40,8 +43,10 @@ export PROJ_ROOT=~/ac
 
 # virtualenv
 export WORKON_HOME=/Users/kip/ac/Environments
-if [[ -d /usr/local/bin//virtualenvwrapper.sh ]] ; then
+if [[ -r /usr/local/bin//virtualenvwrapper.sh ]] ; then
     source /usr/local/bin/virtualenvwrapper.sh
+elif [[ -r /opt/homebrew/bin/virtualenvwrapper.sh  ]] ; then
+    source /opt/homebrew/bin/virtualenvwrapper.sh
 fi
 function venv-prompt() {
     echo $(basename ${VIRTUAL_ENV:-''})
