@@ -365,8 +365,8 @@ function! RunDjangoTests(test_file, use_make)
     if (match(a:test_file, 'creditqb') == -1 || a:use_make == 0)
         echo "Using Dispatch, value of make: " . a:use_make . ", value of test_file: " . a:test_file
         "let cmd = ":wa! | Dispatch . ~/ac/Environments/trialanderror/bin/activate && REUSE_DB=1 ~/ac/trialanderror/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
-        "let cmd = ":wa! | Dispatch . ~/ac/Environments/CreditQB/bin/activate && DJANGO_SETTINGS_MODULE=creditqb.settings.dev REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
-        let cmd = ":wa! | Dispatch docker exec creditqb nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        "let cmd = ":wa! | Dispatch . ~/ac/Environments/CreditQB/bin/activate && DJANGO_SETTINGS_MODULE=creditqb.settings.dev REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_fil
+        let cmd = ":wa! | Dispatch docker exec -ti creditqb nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
         "let cmd = ":wa! | Dispatch REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
         " echo cmd
     else
@@ -587,8 +587,6 @@ let g:vimwiki_list = [{'path': '~/Personal/wiki/', 'syntax': 'markdown', 'ext': 
 "let g:vimwiki_list = [{'path': '~/Personal/wiki/',}]
 "let g:vimwiki_diary_months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December' }
 "let g:vimwiki_map_prefix = '<leader>W'
-"
-"
 
 " project specific vimrc files
 set exrc
