@@ -1,0 +1,23 @@
+{
+  "disabled": false,
+  "keyBindings": {
+    "0": "shift+ctrl+0",
+    "1": "shift+ctrl+1",
+    "2": "shift+ctrl+2",
+    "3": "shift+ctrl+3",
+    "4": "ctrl+4",
+    "5": "ctrl+5",
+    "6": "ctrl+6",
+    "7": "ctrl+7"
+  },
+  "tasks": [
+    "TODO",
+    "LATER",
+    "WAITING",
+    "DOING",
+    "DONE",
+    "NOW",
+    "CANCELLED"
+  ],
+  "settingsVersion": "v2"
+}

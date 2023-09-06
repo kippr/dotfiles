@@ -1,0 +1,8 @@
+{:logseq-bullet-threading {:version "v1.1.1", :repo "pengx17/logseq-plugin-bullet-threading", :effect false, :theme false}
+ :logseq-journals-calendar {:version "v0.10.8", :repo "xyhp915/logseq-journals-calendar", :effect false, :theme false}
+ :logseq-block-to-page {:version "v1.3.0", :repo "hyrijk/logseq-plugin-block-to-page", :effect false, :theme false}
+ :logseq-heatmap {:version "v2.4.3", :repo "pengx17/logseq-plugin-heatmap", :effect true, :theme false}
+ :logseq-pdf-export-plugin {:version "2.2.7", :repo "sawhney17/logseq-pdf-export", :effect true, :theme false}
+ :logseq-vim-shortcuts {:version "v0.1.17", :repo "vipzhicheng/logseq-plugin-vim-shortcuts", :effect true, :theme false}
+ :logseq-localassets-plugin {:version "1.6.5", :repo "hkgnp/logseq-localassets-plugin", :effect true, :theme false}
+ :logseq-task-management-shortcuts {:version "v0.0.3", :repo "vipzhicheng/logseq-plugin-task-management-shortcuts", :effect false, :theme false}}
