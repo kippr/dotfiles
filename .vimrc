@@ -199,6 +199,8 @@ autocmd FileType sql setlocal shiftwidth=4 tabstop=4 noexpandtab
 
 autocmd FileType vimwiki setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 
+autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 "set statusline=%{fugitive#statusline()}
