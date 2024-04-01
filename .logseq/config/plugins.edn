@@ -5,4 +5,5 @@
  :logseq-pdf-export-plugin {:version "2.2.7", :repo "sawhney17/logseq-pdf-export", :effect true, :theme false}
  :logseq-vim-shortcuts {:version "v0.1.17", :repo "vipzhicheng/logseq-plugin-vim-shortcuts", :effect true, :theme false}
  :logseq-localassets-plugin {:version "1.6.5", :repo "hkgnp/logseq-localassets-plugin", :effect true, :theme false}
- :logseq-task-management-shortcuts {:version "v0.0.3", :repo "vipzhicheng/logseq-plugin-task-management-shortcuts", :effect false, :theme false}}
+ :logseq-task-management-shortcuts {:version "v0.0.3", :repo "vipzhicheng/logseq-plugin-task-management-shortcuts", :effect false, :theme false}
+ :logseq-fenced-code-plus {:version "0.0.7", :repo "xyhp915/logseq-fenced-code-plus", :effect true, :theme false}}

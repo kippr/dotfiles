@@ -5,3 +5,6 @@
 history.sqlite
 afiedt.buf
 .DS_Store
+.logseq/graphs
+.logseq/plugins
+.venv

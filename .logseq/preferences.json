@@ -11,7 +11,7 @@
       "url": null,
       "description": "Logseq default light theme.",
       "mode": "light",
-      "selected": false,
+      "selected": true,
       "group-first": true,
       "group-desc": "light themes"
     },
