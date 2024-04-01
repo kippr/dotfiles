@@ -49,3 +49,9 @@
 [submodule ".vim/bundle/vim-coffee-script"]
 	path = .vim/bundle/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule ".vim/pack/git-plugins/start/ale"]
+	path = .vim/pack/git-plugins/start/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule ".vim/pack/github/start/copilot.vim"]
+	path = .vim/pack/github/start/copilot.vim
+	url = https://github.com/github/copilot.vim
