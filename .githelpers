@@ -51,8 +51,18 @@ rebase_unpushed() {
 }
 
 checkout_selected_branch() {
+    #set -x
+    recent_branches_file=/Users/kip/.recent_git_branches
+    current="^$(git branch --show-current)$"
     #git branch --all --list | sed 's/^[ ]*remotes\///'|egrep -v '^origin/'|selecta|xargs git checkout
-    git branch --all --list | sed 's/^[ ]*remotes\///'|sed 's/^origin\///' | awk '{$1=$1;print}' | sort -u | selecta|xargs git checkout
+    branches=$(git branch --all --list | sed 's/^[* ]*//' | sed 's/^[ ]*remotes\///' | sed 's/^origin\///' | awk '{$1=$1;print}' | grep -v "${current}" | sort -u)
+    all_options=$( { cat ${recent_branches_file} | grep -v "${current}" ; echo "$branches"; } | awk '!seen[$0]++' )
+    selected=$(echo "$all_options" | selecta)
+    git checkout $selected
+    # maintain LIFO list of most recent checked out branches
+    { echo "${selected}"; cat ${recent_branches_file} | grep -v ${selected} ; } | head -n 20 > .temp.txt && mv .temp.txt ${recent_branches_file}
+
+
 }
 
 show_selected_revision() {
