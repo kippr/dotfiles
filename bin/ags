@@ -1,0 +1,10 @@
+#!/bin/zsh
+# ag returns results within a file in order, but order between files is not deterministic (b/c it is multithreaded).
+# That ia a drag when you want to re-run complicated searches and pickup where you left off, so the below adds
+# determinism
+#
+# sort is used for deterministic ordering of file-level results in VIM quicklist, but doesn't re-order within files:
+# we only sort on file name (field 1, separated by colons) and use stable sort so that there is no rearranging
+# if we just run sort on it's own on whole lines, you'll get line 99 after 901
+
+ag --nogroup --nocolor --column $1 $2 $3 $4 $5 | LC_ALL=C sort -t : -k 1,1 -s

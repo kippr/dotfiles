@@ -562,7 +562,7 @@ endfunction
 
 " use ag instead of ack
 " workers=1 ensures deterministic ordering of output, and (at least in qb) doesn't seem to affect speed
-let g:ackprg = 'ag --workers=1 --nogroup --nocolor --column'
+let g:ackprg = '~/bin/ags'
 
 source /Users/kip/code/Tools/private-dotfiles/dbext-config.vim
 
