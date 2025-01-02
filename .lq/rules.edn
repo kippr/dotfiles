@@ -1,0 +1,10 @@
+{:kip/ancestor
+  {:desc "Find all ancestors of a block"
+   :rules [
+      [(ancestor ?block ?parent)
+        [?block :block/parent ?parent]]
+      [(ancestor ?block ?ancestor)
+        [?block :block/parent ?parent]
+        (ancestor ?parent ?ancestor)]
+  ]}
+}

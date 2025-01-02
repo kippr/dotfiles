@@ -1,0 +1,3 @@
+{:default-options
+ {:graph "wiki"
+  :puget false}}

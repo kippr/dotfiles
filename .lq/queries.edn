@@ -1,0 +1,175 @@
+{
+ ;; Properties
+ ;; ==========
+ :cldwalker/page-property
+ {:query [:find (pull ?things [*])
+          :in $ ?region %
+          :where
+          (page-name-property ?_b ?country :region ?region)
+          (page-name-property ?_b2 ?author :country-of-origin ?country)
+          (page-name-property ?things ?_name :authored-by ?author)]
+  :desc "Practice page property query"
+  :default-args ["Middle East"]}
+
+ ;; This count assumes only one type per block
+ :cldwalker/has-property-counts
+ {:parent :lq/has-property
+  :result-transform (fn [result]
+                      (->> result
+                           (reduce (fn [acc e]
+                                     (let [types (get-in e [:block/properties :type])
+                                           type (if (coll? types) (first types) types)]
+                                       (update-in acc [type] (fnil inc 0)))) {})
+                           (sort-by val >)))
+  :default-args ["type"]
+  :desc "Counts for given property by type"}
+
+ :cldwalker/has-property-hosts
+ {:parent :lq/has-property
+  :result-transform (fn [result]
+                      (->> result
+                           (map (fn [m] (get-in m [:block/properties :url])))
+                           (map (fn [url] (.getHost (java.net.URL. url))))
+                           frequencies
+                           (sort-by val >)))
+  :default-args ["type"]}
+
+ :cldwalker/property
+ {:parent :lq/property
+  :default-args ["type" "person"]
+  :desc "Like :parent but with default args"}
+
+ :cldwalker/has-page-property
+ {:query [:find (pull ?b [*])
+          :in $ ?ks %
+          :where
+          [(keyword ?ks) ?k]
+          (has-page-property ?b ?k)]
+  :desc "List pages that have given property"}
+
+ ;; Tags
+ ;; ====
+ :cldwalker/page-ref
+ {:query [:find (pull ?b [*])
+          :in $ ?tag
+          :where (page-ref ?b ?tag)]
+  :desc "List blocks tagged with tag"}
+
+ :cldwalker/tag-ref
+ {:query [:find (pull ?b [*])
+          :in $ ?tag
+          :where [?b :block/refs ?bp] [?bp :block/name ?tag]]
+  :desc "List blocks tagged with tag"}
+
+
+:kip/linked
+{:query [:find (pull ?b [*])
+         :in $ ?tag %
+         :where
+            (or-join [?b ?tag]
+                (page-ref ?b ?tag)
+                (and
+                    (page-ref ?res ?tag)
+                    (ancestor ?res ?b)
+                )
+            )
+         ]
+ :desc "List blocks tagged with tag and their ancestors, up to and indluding the page"}
+
+;; not sure why this doesn't work? i expected that i could pass blockid to this query but no matches
+;; maybe because the input is a string not an int?
+:kip/by-id
+{:query [:find ?content
+         :in $
+         :where [44391 :block/content ?content]]
+ :desc "Find a single block by its db/id"}
+
+:kip/by-id2
+{:query [:find ?content
+         :in $ ?block-id
+         :where [?b :db/id ?block-id]
+                [?b :block/content ?content]]
+ :desc "Find the content of a single block by its db/id"}
+
+:kip/debug-dump-ids
+{:query [:find ?id
+         :where [?b :db/id ?id]]
+ :desc "List all block IDs in the database"}
+
+:kip/debug
+{:query [:find ?b ?attr ?value
+         :where [?b ?attr ?value]]
+ :desc "List all attributes for all blocks"}
+
+ :cldwalker/tags
+ {:query [:find ?b ?tag
+          :where [?b :block/refs ?bp] [?bp :block/name ?tag]]
+  :result-transform (fn [result]
+                      (->> result (map second)))
+  :desc "List tags"}
+
+ :cldwalker/tag-counts
+ {:parent :cldwalker/tags
+  :result-transform (fn [result]
+                      (->> result (map second) frequencies (sort-by val >)))
+  :desc "Tag counts"}
+
+ :cldwalker/tag-inherited-counts
+ {:query [:find ?b ?tag
+          :where
+          [?b :block/path-refs ?bp]
+          [?bp :block/name ?tag]
+          [?bp :block/journal? false]]
+  :result-transform (fn [result]
+                      (->> result (map second) frequencies (sort-by val >)))
+  :desc "Tag counts for inherited tags except journals"}
+
+ ;; Misc
+ ;; ====
+ :cldwalker/page-names
+ {:query [:find ?n
+          :in $ %
+          :where
+          [?_b :block/name ?n]]
+  :desc "List all page names"}
+
+ ;; Tasks
+ ;; =====
+ :cldwalker/task-all
+ {:query [:find (pull ?b
+                      [* :block/parent {:block/page [:db/id :block/name]}])
+          :in $ %
+          :where
+          [?b :block/marker ?_marker]]
+  :desc "List all tasks"}
+
+ :cldwalker/tasks-by-page
+ {:parent :cldwalker/task-all
+  :result-transform (fn [result]
+                      (->> (update-vals
+                            (group-by (fn [x] (get-in x [:block/page :block/name])) result) count)
+                           (sort-by val >)))
+  :desc "Tasks count by page"}
+
+ :cldwalker/tasks-by-marker
+ {:parent :cldwalker/task-all
+  :result-transform (fn [result]
+                      (update-vals (group-by :block/marker result) count))
+  :desc "Tasks count by marker"}
+
+ :cldwalker/tasks-with-urls
+ {:query [:find (pull ?b [*])
+          :in $ %
+          :where
+          (task ?b #{"TODO" "DOING"})
+          (block-content ?b "https")]
+  :desc "Tasks with urls"}
+
+ :cldwalker/tag-tasks
+ {:query [:find (pull ?b [* {:block/refs [:db/id :block/name]}])
+          :in $ ?tag %
+          :where
+          (task ?b #{"TODO" "DOING"})
+          (page-ref ?b ?tag)]
+  :default-args ["eng"]
+  :desc "List all tasks for tag"}}
