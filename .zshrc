@@ -348,6 +348,9 @@ function t()
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/kip/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 
 currenttime=$(date +%H:%M)
