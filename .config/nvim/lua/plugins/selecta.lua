@@ -1,0 +1,5 @@
+return {
+    {
+        "kippr/selecta.nvim"
+    },
+}

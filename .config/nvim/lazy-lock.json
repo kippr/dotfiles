@@ -1,0 +1,11 @@
+{
+  "CopilotChat.nvim": { "branch": "main", "commit": "340f47ea089758beb408bf4acbe0ce61b7111aea" },
+  "copilot.vim": { "branch": "release", "commit": "5015939f131627a6a332c9e3ecad9a7cb4c2e549" },
+  "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
+  "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
+  "powerline": { "branch": "develop", "commit": "574bb1887b9f27b3c046c6b74a1f3ed75b115a75" },
+  "selecta.nvim": { "branch": "master", "commit": "3e3ebc0b302785bcecd5ec32c9c74c803d441a50" },
+  "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
+  "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
+  "vim-tmux-navigator": { "branch": "master", "commit": "791dacfcfc8ccb7f6eb1c853050883b03e5a22fe" }
+}
