@@ -38,17 +38,17 @@
     shows  = "!. ~/.githelpers && show_selected_revision"
     files = diff-tree --no-commit-id --name-only -r
     down = pull --rebase
-[diff "tgz"]
+[xdiff "tgz"]
 	textconv = tar zvtf
-[diff "docx"]
+[xdiff "docx"]
 	textconv = dump-docx.sh
-[diff "xlsx"]
+[xdiff "xlsx"]
 	textconv = dump-xlsx.sh
-[diff "prettyxml"]
+[xdiff "prettyxml"]
     textconv = xml fo
-[diff "xml2yaml"]
+[xdiff "xml2yaml"]
     textconv = to -o .yml -i
-[diff "ipynb"]
+[xdiff "ipynb"]
     textconv = dump-ipynb.sh
 [diff]
 	tool = vimdiff
@@ -56,6 +56,7 @@
 	push = HEAD
 [push]
     default = current
+	autoSetupRemote = true
 	autoSetupRemote = true
 [init]
 	templatedir = ~/.git_template
