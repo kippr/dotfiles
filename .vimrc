@@ -229,6 +229,12 @@ nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 "nnoremap <silent> {Previoust-Mapping} :TmuxNavigatePrevious<cr>
 
+" where did these come from??
+"nnoremap <silent> <leader>h :TmuxNavigateLeft<cr>
+"nnoremap <silent> <leader>l :TmuxNavigateRight<cr>
+"nnoremap <silent> <C-a> :TmuxNavigateLeft<cr>
+"nnoremap <silent> <C-o> :TmuxNavigateRight<cr>
+
 
 
 
