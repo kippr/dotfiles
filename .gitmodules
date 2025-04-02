@@ -1,15 +1,15 @@
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
+	url = git@github.com/altercation/vim-colors-solarized.git
 [submodule ".vim/bundle/vim-fugitive"]
 	path = .vim/bundle/vim-fugitive
-	url = git://github.com/tpope/vim-fugitive.git
+	url = git@github.com/tpope/vim-fugitive.git
 [submodule ".vim/bundle/ack.vim"]
 	path = .vim/bundle/ack.vim
-	url = git://github.com/mileszs/ack.vim.git
+	url = git@github.com/mileszs/ack.vim.git
 [submodule ".vim/bundle/vim-powerline"]
 	path = .vim/bundle/vim-powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
+	url = git@github.com/Lokaltog/vim-powerline.git
 [submodule ".vim/bundle/vim-camelcasemotion"]
 	path = .vim/bundle/vim-camelcasemotion
 	url = https://github.com/bkad/CamelCaseMotion.git
@@ -18,7 +18,7 @@
 	url = git@github.com:kippr/vim-dispatch.git
 [submodule ".vim/bundle/vim-AnsiEsc"]
 	path = .vim/bundle/vim-AnsiEsc
-	url = git://github.com/vim-scripts/AnsiEsc.vim.git
+	url = git@github.com/vim-scripts/AnsiEsc.vim.git
 [submodule ".vim/bundle/snipmate"]
 	path = .vim/bundle/snipmate
 	url = https://github.com/kippr/snipmate.vim.git

@@ -5,4 +5,4 @@
 *.docx diff=docx
 *.xml diff=prettyxml
 #*.xml diff=xml2yaml
-*.ipynb diff=ipynb
+#*.ipynb diff=ipynb
