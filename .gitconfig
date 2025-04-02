@@ -1,6 +1,6 @@
 [user]
 	name = Kris Powell
-	email = kris.powell@kkr.com
+	email = github@krispowell.net
 [color]
 	ui = auto
 [core]
@@ -69,3 +69,6 @@
 	prompt = false
 [pull]
 	rebase = true
+
+[includeIf "gitdir:~/ac/"]
+    path = ~/.gitconfig-kkr
