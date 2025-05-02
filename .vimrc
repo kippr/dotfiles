@@ -1,6 +1,7 @@
 
 " Based on Bram Molenaar's example, added to quite a bit since then
 
+
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
@@ -494,6 +495,9 @@ endfunction
 
 nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
+
+
+nmap <silent> <leader>ln<cr> :set invrelativenumber<cr>
 
 " jedi-vim remaps
 "let g:jedi#rename_command = "<leader>N"
