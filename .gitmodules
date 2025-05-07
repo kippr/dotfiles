@@ -55,3 +55,6 @@
 [submodule ".vim/pack/github/start/copilot.vim"]
 	path = .vim/pack/github/start/copilot.vim
 	url = https://github.com/github/copilot.vim
+[submodule ".config/kitty/.config/kitty/kitty-themes"]
+	path = .config/kitty/.config/kitty/kitty-themes
+	url = git@github.com:dexpota/kitty-themes.git
