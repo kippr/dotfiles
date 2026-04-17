@@ -22,7 +22,7 @@ def get_lines(diff_lines):
 
 
 if __name__ == '__main__':
-    diff_lines = list(fileinput.input())
+    diff_lines = list(fileinput.input(openhook=fileinput.hook_encoded("utf-8")))
     added_lines, removed_lines = get_lines(diff_lines)
     print('%i lines added' % len(added_lines))
     print('%i lines removed' % len(removed_lines))
