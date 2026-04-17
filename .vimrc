@@ -101,7 +101,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
   augroup END
 
-  autocmd BufNewFile,BufRead *.py compiler nose
+  " autocmd BufNewFile,BufRead *.py compiler nose
   autocmd QuickFixCmdPost * call QfMakeCopy()
 
 else
@@ -377,7 +377,9 @@ function! RunDjangoTests(test_file, use_make)
         echo "Using Dispatch, value of make: " . a:use_make . ", value of test_file: " . a:test_file
         "let cmd = ":wa! | Dispatch . ~/ac/Environments/trialanderror/bin/activate && REUSE_DB=1 ~/ac/trialanderror/manage.py test -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
         "let cmd = ":wa! | Dispatch . ~/ac/Environments/CreditQB/bin/activate && DJANGO_SETTINGS_MODULE=creditqb.settings.dev REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_fil
-        let cmd = ":wa! | Dispatch docker exec -ti creditqb nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        let cmd = ":wa! | Dispatch DOCKER_CLI_HINTS=false docker exec -ti creditqb nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        "let cmd = ":wa! | Dispatch DOCKER_CLI_HINTS=false docker exec -ti syphon nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
+        "let cmd = ":wa! | Dispatch docker exec -ti syphon nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
         "let cmd = ":wa! | Dispatch REUSE_DB=1 nosetests -s -m\"((?:^\|[_.-])(:?[tT]est[s]?\|When\|should))\" " . a:test_file
         " echo cmd
     else
