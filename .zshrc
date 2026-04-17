@@ -111,7 +111,7 @@ function precmd() {
   else
   fi
 }
-RPROMPT='${TIME_PROMPT}$(venv-prompt) %{$fg[white]%} $(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='${TIME_PROMPT}$(venv-prompt) %{$fg[green]%} $(~/.zsh/git-cwd-info.rb)%{$reset_color%}'
 
 [ -n "$TMUX" ] && export TERM=screen-256color
 
@@ -352,8 +352,15 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+export UV_NATIVE_TLS=true
+
 
 currenttime=$(date +%H:%M)
 if [[ "$currenttime" > "18:00" ]] || [[ "$currenttime" < "08:00" ]]; then
     /Users/kip/Personal/src/kindle/random-quote.py
 fi
+
+. "$HOME/.local/bin/env"
+
+# opencode
+export PATH=/Users/powek/.opencode/bin:$PATH
