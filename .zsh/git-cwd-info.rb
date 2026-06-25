@@ -31,7 +31,7 @@ def git_head_commit_id
 end
 
 def git_cwd_dirty
-  " %{\e[90m%}✗%{\e[0m%}" unless git_repo_path == '.' || `git ls-files -m`.strip.empty?
+  " %{\e[32m%}✗%{\e[0m%}" unless git_repo_path == '.' || `git ls-files -m`.strip.empty?
 end
 
 def rebasing_etc
@@ -61,5 +61,5 @@ def mins_since_commit
 end
 
 if in_git_repo
-  print " %{\e[90m%}#{git_parse_branch} %{\e[90m%}#{git_head_commit_id}%{\e[0m%}#{rebasing_etc}#{git_cwd_dirty} #{git_mins_since_commit}"
+  print " %{\e[32m%}#{git_parse_branch} %{\e[32m%}#{git_head_commit_id}%{\e[0m%}#{rebasing_etc}#{git_cwd_dirty} #{git_mins_since_commit}"
 end
